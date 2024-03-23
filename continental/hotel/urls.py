@@ -4,7 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='home'),
-    path('login/', login, name='login'),
-    path('booking', booking, name='booking')
-
+    path('home', home, name='home'),
+    # path('guest/<slug:guest_slug>/', UpdateGuest.as_view(), name='update_guest'),
 ]
