@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link type="text/css" href="{% static 'hotel/css/style.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="/main.js">
+    <title>Continental</title>
+</head>
+    <body id="body-helpPage">
+        <div class="container" id="nav-container">
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/media/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" >
+                            <a class="nav-link " href="#">/</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{% url 'home' %}"> Rixos Borovoe Hotel</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="#">/</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="margin-right: 12px;">Помощь</a>
+                        </li>
+                    </ul>
+                    <div class="navbar">
+                        <ul class="navbar-nav me-auto  mb-lg-0">
+                            <li class="nav-item">
+                                <a href=""><img src="{% static 'hotel/media/Settings.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item" >
+                                <a class="nav-link space" href="{% url 'home' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                                Настройка
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><img src="{% static 'hotel/media/cabinet.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <br>
+                    <style>
+                        .accordion {
+                        background-color: #ffffff;
+                        color: #444;
+                        cursor: pointer;
+                        padding: 18px;
+                        width: 100%;
+                        text-align: left;
+                        border: none;
+                        outline: none;
+                        transition: 0.4s;
+                        margin-bottom: 0; /* Remove margins for accordion buttons */
+                        border: 0.9px solid #000000; /* Add borders between accordion buttons */
+                        }
+                        
+                        .active, .accordion:hover {
+                        background-color: #ccc;
+                        }
+                        
+                        .accordion:after {
+                        content: '\002B'; /* Unicode character for "plus" sign (+) */
+                        color: #777;
+                        font-weight: bold;
+                        float: right;
+                        margin-left: 5px;
+                        }
+                        
+                        .active:after {
+                        content: "\2212"; /* Unicode character for "minus" sign (-) */
+                        }
+                        
+                        .panel {
+                        padding: 0 18px;
+                        background-color: white;
+                        display: none;
+                        overflow: hidden;
+                        }
+                        
+                        /* Style the panel class */
+                        .panel.show {
+                        display: block; /* Show the panel content */
+
+    
+                        }
+                        </style>
+                        <div class="container" id="help-page-cont">
+                            <img src="/img/Помощь.svg" alt="" id="helpPage-icon">
+                            <img src="/img/Group 251.svg" alt="" id="img-help-logo">
+                            <div class="container" id="help-page-table">
+                                <h4>Ответы на вопросы</h4>
+                                
+                                <button class="accordion">Как создать новое бронирование в системе?</button>
+                                <div class="panel">
+                                    <p>Здесь будет текст о том, как создать новое бронирование в системе.</p>
+                                </div>
+                                
+                                <button class="accordion">Что делать, если гость прибыл, но его бронирование не отображается в системе?</button>
+                                <div class="panel">
+                                    <p>Здесь будет текст о том, что делать, если гость прибыл, но его бронирование не отображается в системе.</p>
+                                </div>
+
+                                <button class="accordion">Как изменить детали существующего бронирования?</button>
+                                <div class="panel">
+                                    <p>Найдите бронирование через функцию поиска или фильтры, затем выберите опцию “редактировать”. Вы сможете изменить даты пребывания, категорию номера, количество гостей или стоимость проживания.</p>
+                                </div>
+
+                                <button class="accordion">Как выполняется ночной аудит в системе?</button>
+                                <div class="panel">
+                                    <p>Ночной аудит выполняется автоматически в назначенное время (обычно в 00:00). Он обновляет статусы бронирований, переносит не зашедших гостей в предыдущий день и обновляет финансовые данные. В случае необходимости, аудит может быть запущен вручную через вкладку “Ночной-аудит”.</p>
+                                </div>
+
+                                <button class="accordion">Как управлять статусами номеров в ходе работы?</button>
+                                <div class="panel">
+                                    <p>В разделе “Хаус-кипинг” вы можете видеть текущие статусы всех номеров. После проверки или уборки номера меняйте его статус на “Чистый” или “Грязный” соответственно. Это поможет ресепшионистам заселять гостей в подходящие номера.</p>
+                                </div>
+
+                                <button class="accordion">Как получить отчет по занятым/свободным номерам за определенный период?</button>
+                                <div class="panel">
+                                    <p>Перейдите в раздел “Отчеты” и выберите тип отчета, который вы хотите сформировать. Вы можете настроить период, за который требуется отчет, и система предоставит актуальную информацию по занятым и свободным номерам, а также финансовые показатели.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Add more accordions as needed -->
+                        
+                        <script>
+                            var acc = document.getElementsByClassName("accordion");
+                            var i;
+                            
+                            for (i = 0; i < acc.length; i++) {
+                            acc[i].addEventListener("click", function() {
+                                this.classList.toggle("active");
+                                var panel = this.nextElementSibling;
+                                if (panel.style.display === "block") {
+                                panel.style.display = "none";
+                                } else {
+                                panel.style.display = "block";
+                                }
+                            });
+                            }
+                        </script>
+                       
+
+        </div>
+    </body>
+</html>
