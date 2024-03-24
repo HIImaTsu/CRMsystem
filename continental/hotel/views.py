@@ -31,6 +31,8 @@ def home(request):
 #     success_url = reverse_lazy('home')
 
 def housekeeping(request):
+    # Рассмотреть оптимизацию подсчета данных этих
+
     # today = timezone.now().date()
     # now = timezone.now()
     #
