@@ -1,6 +1,12 @@
-from django.forms import forms
-
+from django import forms
 from .models import *
+
+class LoginUserForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput)
+    password = forms.CharField(widget=forms.PasswordInput)
+
+
+
 
 # class AddGuestForm(forms.ModelForm):
 #

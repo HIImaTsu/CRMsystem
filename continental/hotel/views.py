@@ -1,6 +1,7 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.contrib.auth import login, authenticate, logout
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.views.generic import UpdateView
 from .models import *
@@ -47,11 +48,30 @@ def housekeeping(request):
     # }
     return render(request, 'hotel/housekeeping.html')
 
-def bookingPage(request):
+def booking_page(request):
     return render(request, 'hotel/bookingPage.html')
 
-def helpPage(request):
+def help_page(request):
     return render(request, 'hotel/helpPage.html')
 
-def login(request):
-    return render(request, 'hotel/login.html')
+def login_user(request):
+    if request.method == 'POST':
+        form = LoginUserForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(request, username=cd['username'],
+                                password=cd['password'])
+            if user and user.is_active:
+                login(request, user)
+                return HttpResponseRedirect(reverse('home'))
+    else:
+        form = LoginUserForm()
+
+    return render(request, 'hotel/login.html', {'form': form})
+
+
+def logout_user(request):
+    logout(request)
+    return HttpResponseRedirect(reverse('login'))
+
+

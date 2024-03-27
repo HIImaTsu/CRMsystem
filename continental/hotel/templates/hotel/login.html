@@ -19,7 +19,8 @@
                 
                 <div class="login-container" style="font-family: Arial, sans-serif; border-radius: 5px; max-width: 500px;">
                     <h1 style="text-align: center; color: #333; margin-bottom: 40px;">Вход в аккаунт</h1>
-                    <form action="/submit-your-login-form" method="post">
+                    <form action="" method="post">
+                        {% csrf_token %}
                     <div class="form-field" style="margin-bottom: 10px;">
                         <label for="login" style="display: block; margin-bottom: 5px;"><h2>Логин</h2></label>
                         <input type="text" id="login" name="login" required style="width: 100%; padding: 10px; margin: 5px 0; display: inline-block; border: 1px solid #ccc; box-sizing: border-box; border-radius: 3px;">
