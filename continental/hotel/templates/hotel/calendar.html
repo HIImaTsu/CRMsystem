@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список бронирования</title>
+    <style>
+        /* Стили для вашего списка бронирований */
+        .booking-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .booking-item {
+            border-bottom: 1px solid #ccc;
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+    <ul class="booking-list" id="bookingList">
+        <!-- Список бронирований будет сюда -->
+    </ul>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Предполагая, что данные бронирования загружены из '/get-bookings/'
+            fetch('/get-bookings/')
+                .then(response => response.json())
+                .then(data => {
+                    const bookings = JSON.parse(data);
+                    const listElement = document.getElementById('bookingList');
+
+                    bookings.forEach(booking => {
+                        const listItem = document.createElement('li');
+                        listItem.className = 'booking-item';
+                        listItem.textContent = `${booking.fields.guest_name} - с ${booking.fields.checkin_date} до ${booking.fields.checkout_date}`;
+                        listElement.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении бронирований:', error);
+                });
+        });
+    </script>
+</body>
+</html>

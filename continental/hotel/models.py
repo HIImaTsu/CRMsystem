@@ -1,4 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as _  # для статусов в модели Room
 from django.core.exceptions import ValidationError
 
@@ -17,6 +19,7 @@ class Guest(models.Model):
     phone = models.CharField(max_length=20)
     hotel = models.ForeignKey('Hotel', on_delete=models.PROTECT, related_name='guests')
 
+
 class GuestProfile(models.Model):
     guest = models.OneToOneField(Guest, on_delete=models.CASCADE, related_name='profile')
     iin = models.CharField(max_length=12, blank=True, null=True, unique=True)
@@ -25,13 +28,21 @@ class GuestProfile(models.Model):
     deadline_of_document = models.DateField()
     guest_balance = models.IntegerField()
 
+
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class RoomType(models.Model):
+    hotel = models.ForeignKey('Hotel', on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField(max_length=50)
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
     capacity = models.IntegerField()
+
+    def __str__(self):
+        return self.name
 
 class Booking(models.Model):
     class Status(models.TextChoices):
@@ -60,6 +71,7 @@ class Room(models.Model):
     type = models.ForeignKey('RoomType', on_delete=models.PROTECT, related_name='rooms')
     room_number = models.IntegerField()
 
+
     class Meta:
         unique_together = (('hotel', 'room_number'),)    # для уникальности номеров в отеле
 
@@ -85,6 +97,14 @@ class Payment(models.Model):
         NON_CASH = 'NON_CASH', _('Безналичные')
     booking = models.ForeignKey('Booking', on_delete=models.PROTECT, related_name='payment')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    payment_date = models.DateTimeField()
+    payment_date = models.DateTimeField(auto_now_add=True)
     payment_method = models.CharField(max_length=30, choices=PaymentMethod.choices)
 
+
+class Staff(models.Model):
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    hotel = models.ForeignKey('Hotel', on_delete=models.CASCADE)
+    position = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.user.username
