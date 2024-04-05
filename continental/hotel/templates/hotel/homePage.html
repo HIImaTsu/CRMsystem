@@ -13,23 +13,23 @@
     <div class="container" id="nav-container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/media/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" >
                     <a class="nav-link active" aria-current="page" href="#">/</a>
                 </li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"> Rixos Borovoe Hotel</a></li>
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'home' %}"> Rixos Borovoe Hotel</a></li>
             </ul>
             <div class="navbar">
                 <ul class="navbar-nav me-auto  mb-lg-0">
                     <li class="nav-item">
-                        <a href=""><img src="{% static 'hotel/media/Помощь.svg' %}" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a href=""><img src="{% static 'hotel/media/Settings.svg' %}" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-link space" href="{% url 'help' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
@@ -37,7 +37,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href=""><img src="{% static 'hotel/media/cabinet.svg' %}" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
@@ -55,7 +55,7 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">Размещение броней</h5>
                   </div>
-                  <img src="{% static 'hotel/media/Bookings.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
+                  <img src="{% static 'hotel/img/Bookings.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
                 </div>
               </a>
             </div>
@@ -65,7 +65,7 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">House-Keeping</h5>
                   </div>
-                  <img src="{% static 'hotel/media/house-keeping.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
+                  <img src="{% static 'hotel/img/house-keeping.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
                 </div>
               </a>
             </div>
@@ -75,23 +75,23 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">Отчеты</h5>
                   </div>
-                  <img src="{% static 'hotel/media/Reports.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px; " class="card-img-top" alt="...">
+                  <img src="{% static 'hotel/img/Reports.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px; " class="card-img-top" alt="...">
                 </div>
                </a>
               </div>
             <div class="col">
-              <a href="{% url 'home' %}" class="nav-link">
+              <a href="{% url 'night-audit' %}" class="nav-link">
                 <div class="card h-100" style="border-bottom-left-radius:50px; border-bottom-right-radius:50px">
                   <div class="card-body">
                     <h5 class="card-title" style="text-align: center;">Ночной аудит</h5>
                   </div>
-                  <img src="{% static 'hotel/media/NightAudit.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
+                  <img src="{% static 'hotel/img/NightAudit.svg' %}" style="width: 156px; height: 157px; margin-left: 80px; margin-block-end: 50px;" class="card-img-top" alt="...">
                 </div>
               </a>
             </div>
           </div>
 
     </div>
-    <img src="{% static 'hotel/media/три_дома.svg' %}" alt="" id="img-bg">
+    <img src="{% static 'hotel/img/три_дома.svg' %}" alt="" id="img-bg">
 </body>
 </html>

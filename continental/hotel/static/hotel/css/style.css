@@ -64,13 +64,13 @@
 }
 
 #body-helpPage {
-    background-image: url(/img/иллюстрация_создание_новой_брони.svg);
+    background-image: url(/static/hotel/img/illustration_of_new_reservation.svg);
     width: 1500px;
 }
 
 #body-nightAudit {
     background-color: #4E5C6E;
-    background-image: url(/img/Ночной-Аудит_домики.svg);
+    background-image: url(/static/hotel/img/Nochnoi-audit-domiki.svg);
     background-repeat: no-repeat;
     background-size: 672px 478px;
     background-position: 35px 400px;
