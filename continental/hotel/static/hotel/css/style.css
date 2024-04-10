@@ -1,0 +1,125 @@
+#nav-bar {
+    width: 1412px;
+    height: 103px;
+    background-color: rgb(123, 124, 124);
+    border-radius: 6px;
+    left: 50px;
+    margin-top: -16px;
+}
+
+#img-help {
+    width: 20px;
+    height: 23px;
+    left: 82px;
+    margin-top: 9px;
+}
+
+#img-bg {
+    height: 416px;
+    margin-left: 120px;
+    margin-top: 74px;
+}
+
+.row {
+    display: flex;
+  }
+  
+.column {
+    flex: 50%;
+  }
+
+.log {
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    margin-left: 200px;
+    margin-top: 220px;
+    background-color: rgb(255, 255, 255);
+}
+
+.log-col-2 {
+    width: 600px;
+    background-color: #F4F4F4 !important; 
+    border-radius: 25px;
+    height: 600px !important;
+}
+
+#help-page-cont {
+    width: 1070px;
+    height: 742px;
+    border-radius: 6px;
+    background-color: white;
+}
+
+#help-page-table {
+    padding: 30px 40px;
+    padding-top: 50px;
+}
+
+#img-help-logo {
+    margin-left: 360px;
+    margin-top: 60px;
+}
+
+#body-helpPage {
+    background-image: url(/static/hotel/img/illustration_of_new_reservation.svg);
+    width: 1500px;
+}
+
+#body-nightAudit {
+    background-color: #4E5C6E;
+    background-image: url(/static/hotel/img/Nochnoi-audit-domiki.svg);
+    background-repeat: no-repeat;
+    background-size: 672px 478px;
+    background-position: 35px 400px;
+
+}
+
+#helpPage-icon{
+    margin-block-end: 85px;
+    margin-left: 10px;
+
+} 
+
+#account-profile-col {
+    width: 279px;
+    height: 770px;
+    border-radius: 6px 0 0 6px;
+    background-color: rgb(255, 255, 255);
+}
+
+#img-account-profile {
+    width: 200px;
+    height: 200px;
+    margin-top: 30px;
+    margin-left: 28px;
+}
+
+.account-text-profile {
+    text-align: center;
+}
+
+#account-main-cont {
+    margin-top: 10px;
+}
+
+#account-line-col {
+    margin-left: 30px;
+    margin-top: 330px;
+    width: 170px;
+    color: black;
+}
+
+#account-pass-col {
+    width: 1005px;
+    height: 450px;
+    border-radius: 0 25px 0 0;
+    background-color: white;
+}
+
+#body-accountPage {
+    background-color: #F4F4F4;
+}
+

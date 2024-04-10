@@ -1,0 +1,365 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+    <title>Continental</title>
+</head>
+<body id="body-accountPage">
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+          }
+          
+          .card {
+            background: #FFFFFF;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            position: relative;
+            width: 300px;
+          }
+          
+          .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+          }
+          
+          .card-header span {
+            font-size: 16px;
+          }
+          
+          .card-header svg {
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+          }
+          
+          
+          .card-content.visible {
+            display: block;
+          }
+          
+          .toggle {
+            cursor: pointer;
+          }
+          
+          .arrow-down {
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            display: inline-block;
+            padding: 3px;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+          }
+          
+          .arrow-up {
+            transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+          }
+          
+          .btn {
+            background-color: #4E5C6E;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            margin-left: 600px;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 350px;
+          }
+
+          .btn-2 {
+            background-color: #4E5C6E;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+          }
+          .btn-3 {
+            background-color: #4E5C6E;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-left: 73px;
+          }
+          
+          
+          
+          .password-container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+          }
+        
+          .password-field {
+            position: relative;
+            margin-bottom: 20px;
+          }
+        
+          .password-field input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+          }
+        
+          .password-field label {
+            display: block;
+          }
+        
+          .show-password {
+            position: absolute;
+            right: 10px;
+            top: 55px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+          }
+        
+          .show-password:focus {
+            outline: none;
+          }
+          
+          /* Styling for the refresh icon, replace with an actual icon as needed */
+          .show-password::before {
+            content: url(/img/off.svg); /* Unicode for a simple rotation symbol */
+            font-size: 16px;
+          }
+            
+            .input-group {
+              margin-bottom: 10px;
+            }
+            
+            .input-group input {
+              width: 100%;
+              padding: 10px;
+              margin-top: 5px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+            
+            .input-group svg {
+              width: 20px;
+              height: 20px;
+              cursor: pointer;
+            }
+
+
+
+            .accordion {
+                background-color: #ffffff;
+                color: #444;
+                cursor: pointer;
+                margin-left: 38px;
+                padding: 18px;
+                width: 930px;
+                text-align: left;
+                border: none;
+                outline: none;
+                transition: 0.4s;
+                margin-bottom: 0; /* Remove margins for accordion buttons */
+                border: 0.9px solid #000000; /* Add borders between accordion buttons */
+                border-radius: 15px;
+                }
+                
+                .active, .accordion:hover {
+                background-color: #ffffff;
+                }
+                
+                .accordion:after {
+                content: '\002B'; /* Unicode character for "plus" sign (+) */
+                color: #777;
+                font-weight: bold;
+                float: right;
+                margin-left: 5px;
+                }
+                
+                .active:after {
+                content: "\2212"; /* Unicode character for "minus" sign (-) */
+                }
+                
+                .panel {
+                padding: 0 18px;
+                background-color: white;
+                display: none;
+                overflow: hidden;
+                }
+                
+                /* Style the panel class */
+                .panel.show {
+                display: block; /* Show the panel content */
+
+
+                }
+                
+                .left-image {
+                  position: absolute;
+                  top: 14vh; /* Position 10% from the top of the viewport */
+                  left: 6.9vw; /* Position 5% from the left of the viewport */
+                  z-index: 1;
+                }
+
+                .left-image img {
+                  width: 20vw ; /* This will ensure the image's width is auto-adjusted */
+                  max-height: 85.5vh; /* This will limit the image's height to 80% of the viewport height */
+                  transform: rotate(270 deg);
+                }
+
+      </style>
+            <!-- NAVBAR НАЧАЛО СТРАНИЦЫ-->
+    <div class="container" id="nav-container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'help' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" >
+                            <a class="nav-link " href="#">/</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{% url 'home' %}"> Rixos Borovoe Hotel</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="#">/</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link space" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                            Настройка
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="navbar">
+                        <ul class="navbar-nav me-auto  mb-lg-0">
+                            <li class="nav-item">
+                                <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
+                            </li>
+                            <li>
+                                <a href=""><img src="{% static 'hotel/img/Профиль.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"  class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
+                            
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+        </nav>
+        <!-- NAVBAR НАЧАЛО СТРАНИЦЫ-->
+          
+        <div class="container" id="account-main-cont">
+        <div class="row">
+            <div class="col-4 md-12" id="account-profile-col">
+                <img src="{% static 'hotel/img/PROFIle.svg' %}" alt="" id="img-account-profile">
+                <br>
+                <br>
+                <h2 class="account-text-profile">adilet_yeraly</h2>
+                <p class="account-text-profile">Менеджер отдела продаж</p>
+                <hr id="account-line-col">
+                <!--<ul class="nav">
+                    <a href=""><img src="/img/VerticalAlignTopOutlined.svg" alt="" style="margin-left:10px margin-top:20px;"></a>
+                    <a href="" class="nav-link"><h4><button class="btn-2">Выход</button></h4></a>
+                </ul> -->
+                <a href="{% url 'home' %}" class="nav-link"><h4><button class="btn-3">Выход</button></h4></a>
+            </div>
+
+            <div class="col-4 md-12" id="account-space-col">
+
+
+            <div class="col-4 md-12" id="account-pass-col">
+                                
+                <div class="container" id="help-page-table">
+                    <div class="button-container">
+                        <!-- Access button or info -->
+                        <div class="access-container">
+                           <h5> <button class="btn-2">Доступ</button>Редактирование Броней / Отчеты / Ночной-Аудит</h5>
+                            <span class="button-icon" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">&gt;</span>
+                          </div>
+                        </div>
+                    </div>  
+                        
+                    
+                    <button class="accordion">Изменить пароль</button>
+                    <div class="panel">
+                           
+
+                        <div class="password-container">
+                            <div class="password-field">
+                              <label for="current-password">Старый пароль</label>
+                              <input id="current-password" type="password">
+                              <button class="show-password"></button>
+                            </div>
+                          
+                            <div class="password-field">
+                              <label for="new-password">Новый пароль</label>
+                              <input id="new-password" type="password">
+                              <button class="show-password"></button>
+                            </div>
+                          
+                            <div class="password-field">
+                              <label for="confirm-password">Подтверждение пароля</label>
+                              <input id="confirm-password" type="password">
+                              <button class="show-password"></button>
+                            </div>
+                        </div>
+
+                        <a href="{% url 'cabinet' %}"><button class="btn">Изменить</button></a>
+                        <br>
+                        <br>
+                    </div>
+                    <img src="{% static 'hotel/img/Group 57.svg' %}" alt="" class="left-img">
+
+                    <script>
+                        var acc = document.getElementsByClassName("accordion");
+                        var i;
+                        
+                        for (i = 0; i < acc.length; i++) {
+                        acc[i].addEventListener("click", function() {
+                            this.classList.toggle("active");
+                            var panel = this.nextElementSibling;
+                            if (panel.style.display === "block") {
+                            panel.style.display = "none";
+                            } else {
+                            panel.style.display = "block";
+                            }
+                        });
+                        }
+                    </script>
+            </div>
+            </div>
+        </div>
+    </div>
