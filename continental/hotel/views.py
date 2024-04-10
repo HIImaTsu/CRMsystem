@@ -27,7 +27,7 @@ from .serializers import BookingSerializer
 
 
 def index(request):
-    return render(request, 'hotel/example4.html')
+    return HttpResponse("<h1>Страница CONTIN</h1>")
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
@@ -130,10 +130,7 @@ def house_keeping(request):
 
 @login_required()
 def booking(request):
-    bookings_list = Booking.objects.annotate(date=TruncDate('checkin_date')).order_by('date')
-    bookings_grouped = {k: list(v) for k, v in groupby(bookings_list, lambda x: x.date)}
-
-    return render(request, 'hotel/bookingPage.html', {'bookings_grouped': bookings_grouped})
+    return render(request, 'hotel/bookingPage.html')
 
 @login_required()
 def night_audit(request):

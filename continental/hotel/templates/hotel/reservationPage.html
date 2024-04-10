@@ -920,23 +920,9 @@
     </div>
 
 <script>
-    // Temporary storage for payment data
-let temporaryPaymentData = {};
 
-// Function to capture payment data on 'Оплата' button click
-function saveTemporaryPaymentData() {
-    temporaryPaymentData = {
-        paymentMethod: document.getElementById('payment_method').value,
-        amount: document.getElementById('amount').value
-    };
-
-    // Ideally, you should validate the payment data here before saving
-
-    // Show a message to the user indicating the payment data has been temporarily saved
-    alert('Данные об оплате временно сохранены.');
-}
-
-document.getElementById('save-button-1').addEventListener('click', saveTemporaryPaymentData);
+// Attach the submitAllData function to the 'Сохранить' button
+document.getElementById('save-button').addEventListener('click', submitAllData);
 
 // Function to handle form submission
 function submitAllData(e) {
@@ -945,10 +931,6 @@ function submitAllData(e) {
     // Создаем новый объект FormData
     var formData = new FormData();
 
-    // Add payment data to the FormData object
-    for (var key in temporaryPaymentData) {
-        formData.append(key, temporaryPaymentData[key]);
-    }
 
     // Получаем данные из всех трех форм и добавляем в formData
     var formOne = document.getElementById('form_one');
@@ -994,8 +976,7 @@ function submitAllData(e) {
     });
 }
 
-// Attach the submitAllData function to the 'Сохранить' button
-document.getElementById('save-button').addEventListener('click', submitAllData);
+
 
 
 // Функция для получения значения cookie

@@ -6,22 +6,7 @@
 <title>Dynamic Schedule</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<style>
-        .matching-date {
-          background-color: #4CAF50; /* Пример цвета для совпадающих дат */
-        }
 
-        .connected-box {
-          border-collapse: collapse; /* Пример стиля для "соединения" коробок */
-        }
-
-        .connected-box div {
-          border-bottom: 1px solid #fff; /* Убираем нижнюю границу для визуального соединения */
-        }
-
-        .connected-box div:last-child {
-          border-bottom: none; /* Возвращаем нижнюю границу последнему элементу */
-        }
 
 </style>
 <body class="bg-gray-100">
@@ -37,7 +22,7 @@
   <!-- Columns will be populated by JavaScript -->
 </div>
 <script>
-  let currentDate = new Date(2024, 2, 4); // Инициализация с датой
+  let currentDate = new Date(); // Инициализация с датой
   const scheduleContent = document.getElementById('scheduleContent');
 
 
