@@ -13,5 +13,6 @@ urlpatterns = [
     path('add-booking/', add_booking, name='add-booking'),
     path('night-audit/', night_audit, name='night-audit'),
     path('cabinet/', cabinet, name='cabinet'),
+    path('api/bookings/', booking_data, name='api_bookings'),
     # path('guest/<slug:guest_slug>/', UpdateGuest.as_view(), name='update_guest'),
 ]

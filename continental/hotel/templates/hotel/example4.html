@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dynamic Schedule</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<style>
+        .matching-date {
+          background-color: #4CAF50; /* Пример цвета для совпадающих дат */
+        }
+
+        .connected-box {
+          border-collapse: collapse; /* Пример стиля для "соединения" коробок */
+        }
+
+        .connected-box div {
+          border-bottom: 1px solid #fff; /* Убираем нижнюю границу для визуального соединения */
+        }
+
+        .connected-box div:last-child {
+          border-bottom: none; /* Возвращаем нижнюю границу последнему элементу */
+        }
+
+</style>
+<body class="bg-gray-100">
+
+<div class="flex items-center justify-center py-2">
+  <button id="prevDate" class="px-3 py-1 rounded bg-gray-300 m-1">&lt;</button>
+  <div id="dates" class="flex">
+    <!-- Dates will be populated by JavaScript -->
+  </div>
+  <button id="nextDate" class="px-3 py-1 rounded bg-gray-300 m-1">&gt;</button>
+</div>
+<div id="scheduleContent" class="container mx-auto p-4 grid grid-cols-3 gap-4">
+  <!-- Columns will be populated by JavaScript -->
+</div>
+<script>
+  let currentDate = new Date(2024, 2, 4); // Инициализация с датой
+  const scheduleContent = document.getElementById('scheduleContent');
+
+
+  // Обновленные данные для записей с поддержкой нескольких броней на одну дату
+  const entries = {
+    '2024-03-04': [
+      { text: 'Nurtas Almir', color: 'bg-green-300' },
+      // Предполагаемая вторая запись на ту же дату
+      { text: 'Забронирован', color: 'bg-red-300' }
+    ],
+    '2024-03-05': [
+      { text: 'Nurtas Almir', color: 'bg-green-300' },
+      // Предполагаемая вторая запись на ту же дату
+      { text: 'Забронирован', color: 'bg-red-300' }
+    ],
+    '2024-03-06': [
+      { text: 'Nurtas Almir', color: 'bg-green-300' },
+      // Предполагаемая вторая запись на ту же дату
+      { text: 'Забронирован', color: 'bg-red-300' }
+    ],
+    '2024-03-03': [
+      { text: 'Рахат', color: 'bg-blue-300' },
+      // Предполагаемая вторая запись на ту же дату
+      { text: 'Рахат-2', color: 'bg-blue-300' }
+    ],
+    // Добавьте больше дат и записей по мере необходимости...
+  };
+
+
+  function formatDate(date) {
+    return date.toISOString().split('T')[0];
+  }
+
+  function populateDates() {
+    const datesDiv = document.getElementById('dates');
+    datesDiv.innerHTML = '';
+    for (let i = 0; i < 3; i++) {
+        const newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + i);
+        const dateDiv = document.createElement('div');
+        // Increase horizontal margin using mx-2 or mx-4 for more space
+        dateDiv.className = 'px-4 py-1 mx-36 rounded bg-white'; // Changed mx-1 to mx-4
+        dateDiv.textContent = formatDate(newDate);
+        datesDiv.appendChild(dateDiv);
+    }
+}
+
+
+function populateSchedule() {
+    scheduleContent.innerHTML = ''; // Очистка расписания
+    const maxEntriesPerDay = 3; // Максимальное количество блоков бронирования на дату
+
+    for (let i = 0; i < 3; i++) {
+        const newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() + i);
+        const entryDate = formatDate(newDate);
+        const columnDiv = document.createElement('div');
+        columnDiv.className = 'flex flex-col items-center gap-2'; // Добавлен класс gap для пространства между блоками
+
+        const dayEntries = entries[entryDate] || [];
+        dayEntries.forEach(({text, color}) => {
+            const entryDiv = document.createElement('div');
+            entryDiv.className = `${color} rounded px-4 py-2 my-1 w-full`;
+            entryDiv.textContent = text;
+            columnDiv.appendChild(entryDiv);
+        });
+
+        // Добавление дополнительных блоков для заполнения пространства
+        for (let j = dayEntries.length; j < maxEntriesPerDay; j++) {
+            const fillerDiv = document.createElement('div');
+            fillerDiv.className = 'bg-gray-300 rounded px-4 py-2 my-1 w-full'; // Используйте желаемый цвет для заполнения
+            fillerDiv.textContent = 'Пусто'; // Текст для заполнителя, можно оставить пустым
+            columnDiv.appendChild(fillerDiv);
+        }
+
+        scheduleContent.appendChild(columnDiv);
+    }
+}
+
+
+
+  // Update function that repopulates dates and schedule
+  function update() {
+    populateDates();
+    populateSchedule();
+  }
+
+  // Navigation button events
+  document.getElementById('prevDate').addEventListener('click', () => {
+    currentDate.setDate(currentDate.getDate() - 1);
+    update();
+  });
+
+  document.getElementById('nextDate').addEventListener('click', () => {
+    currentDate.setDate(currentDate.getDate() + 1);
+    update();
+  });
+
+  // Initialize
+  update();
+
+  function getDatesInRange(startDate, endDate) {
+  const dates = [];
+  let currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    dates.push(currentDate.toISOString().split('T')[0]);
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dates;
+}
+
+
+
+function fetchBookingData() {
+    fetch('/api/bookings/')
+    .then(response => response.json())
+    .then(bookings => {
+        bookings.forEach(booking => {
+            const checkinDate = new Date(booking.checkin_date);
+            const checkoutDate = new Date(booking.checkout_date);
+            const dateRange = getDatesInRange(checkinDate, checkoutDate);
+
+            dateRange.forEach(date => {
+                if (!entries[date]) {
+                    entries[date] = [];
+                }
+                entries[date].push({
+                    text: `${booking.guest_info.first_name} ${booking.guest_info.last_name}`,
+                    color: 'bg-green-300',
+                });
+            });
+        });
+
+        update(); // Обновляем расписание на странице
+    })
+    .catch(error => console.error('Error fetching bookings:', error));
+}
+
+fetchBookingData();
+
+
+
+
+
+</script>
+</body>
+</html>

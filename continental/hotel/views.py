@@ -1,20 +1,33 @@
+import json
+from itertools import groupby
+
 from django.contrib.auth import login, authenticate, logout
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db.models.functions import TruncDate
+from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
 from django.utils import timezone
 from django.views.generic import UpdateView
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from .models import *
 from .forms import *
 from django.core.serializers import serialize
 import random
+import logging
 from django.contrib import messages
+from django.core.serializers import serialize
+
+from .serializers import BookingSerializer
 
 
 def index(request):
-    return HttpResponse("<h1>Страница CONTINENTAL</h1>")
+    return render(request, 'hotel/example4.html')
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
@@ -30,20 +43,18 @@ def add_booking(request):
     hotel_id = staff_member.hotel.id
     room_types = RoomType.objects.filter(hotel__id=hotel_id)
     way_of_staying_choices = Booking.ArrivalMethod.choices
+    payment_method = Payment.PaymentMethod.choices
 
     if request.method == 'POST':
         booking_form = AddBookingForm(request.POST)
         booking_form.fields['room_type'].queryset = RoomType.objects.filter(hotel_id=hotel_id)
         guest_form = AddGuestForm(request.POST)
         profile_form = AddGuestProfileForm(request.POST)
-        print(request.POST)
-
-        if not booking_form.is_valid() or not guest_form.is_valid() or not profile_form.is_valid():
-            print(booking_form.errors)
-            print(guest_form.errors)
-            print(profile_form.errors)
 
         if booking_form.is_valid() and guest_form.is_valid() and profile_form.is_valid():
+
+            messages.success(request, 'Бронь и гость успешно зарегистрированы!')
+
             guest = guest_form.save(commit=False)
             guest.hotel = staff_member.hotel
             guest.save()
@@ -56,7 +67,28 @@ def add_booking(request):
             profile.guest = guest
             profile.save()
 
-            return redirect('booking')
+            # ДЛЯ ВВЕДЕНИЯ О БАЛАНСЕ ГОСТЯ
+            payment_method = request.POST.get('paymentMethod')
+            amount = request.POST.get('amount')
+            if payment_method and amount:
+                try:
+                    amount = float(amount)  # Убедитесь, что сумма преобразуется в число
+                except ValueError:
+                    # Необходима обработка ошибки, если сумма не является числом
+                    pass
+
+                # Создаем новую запись оплаты
+                Payment.objects.create(
+                    booking=new_booking,
+                    method=payment_method,
+                    amount=amount
+                )
+
+            redirect_url = reverse('booking')  # Используем reverse, чтобы получить URL по имени пути
+            return JsonResponse({'redirect_url': request.build_absolute_uri(redirect_url)})
+
+        else:
+            messages.error(request, 'Введены некорректные данные.')
     else:
         booking_form = AddBookingForm()
         guest_form = AddGuestForm()
@@ -68,7 +100,8 @@ def add_booking(request):
         'profile_form': profile_form,
         'room_types': room_types,
         'way_of_staying_choices': way_of_staying_choices,
-        'gender_choices': Guest.GENDER_CHOICES
+        'gender_choices': Guest.GENDER_CHOICES,
+        'payment_method': payment_method,
     })
 
 # class UpdateGuest(UpdateView):
@@ -97,7 +130,10 @@ def house_keeping(request):
 
 @login_required()
 def booking(request):
-    return render(request, 'hotel/bookingPage.html')
+    bookings_list = Booking.objects.annotate(date=TruncDate('checkin_date')).order_by('date')
+    bookings_grouped = {k: list(v) for k, v in groupby(bookings_list, lambda x: x.date)}
+
+    return render(request, 'hotel/bookingPage.html', {'bookings_grouped': bookings_grouped})
 
 @login_required()
 def night_audit(request):
@@ -105,7 +141,7 @@ def night_audit(request):
 
 @login_required()
 def cabinet(request):
-    return render(request, 'hotel/homePage.html')
+    return render(request, 'hotel/accountPage.html')
 
 def help_page(request):
     return render(request, 'hotel/helpPage.html')
@@ -129,6 +165,13 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('login'))
+
+@api_view(['GET'])
+def booking_data(request):
+    bookings = Booking.objects.all().select_related('guest')
+    serializer = BookingSerializer(bookings, many=True)
+    return Response(serializer.data)  # Rest Framework позаботится о форматировании ответа
+
 
 
 

@@ -22,3 +22,8 @@ class AddBookingForm(forms.ModelForm):
         model = Booking
         fields = ['checkin_date', 'checkout_date', 'number_of_guests',
                   'number_of_nights', 'way_of_staying', 'number_of_nights']
+
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['amount', 'payment_method']

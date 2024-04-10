@@ -49,8 +49,8 @@
         }
     
         .personal-info-card {
-          margin-right: 490px;
-          margin-block-end: 10px;
+          margin-right: 300px;
+          margin-block-end: 50px;
           background: #fff;
           width: 44%; /* Занимает всю ширину */
           max-width: none; /* Убираем ограничение по ширине */
@@ -99,7 +99,7 @@
         border-radius: 4px;
       }
 
-      #selectpay-1 {
+      #amount {
         height: 40px;
         width: 80%;
         padding: 0;
@@ -226,27 +226,34 @@
       }
 
       .left-image {
-        position: absolute; /* или используйте position: fixed; в зависимости от желаемого эффекта */
-        top: 120px; /* или другое значение для вертикального позиционирования */
-        left: 110px; /* или другое значение для горизонтального позиционирования */
+        position: absolute;
+        top: 0vh;
+        left: 6.9vw;
         z-index: 1;
       }
-      
+
       .left-image img {
-        width: 280px; /* Укажите необходимую ширину */
-        height: 680px; /* Чтобы сохранить пропорции изображения */
+        width: 20vw ;
+        max-height: 85.5vh;
       }
 
-      .left-image-2 {
-        position: absolute; /* или используйте position: fixed; в зависимости от желаемого эффекта */
-        top: 120px; /* или другое значение для вертикального позиционирования */
-        left: 110px; /* или другое значение для горизонтального позиционирования */
-        z-index: 0;
+      @media (max-width: 768px) {
+          .upper-cards {
+            flex-direction: column;
+            align-items: stretch;
+          }
+          .form-container, .booking-form {
+            width: 100%;
+          }
+          .left-image {
+              left: 10vw;
+          }
       }
-      
-      .left-image-2 img {
-        width: 280px; /* Укажите необходимую ширину */
-        height: 740px; /* Чтобы сохранить пропорции изображения */
+
+      @media (min-width: 1024px) {
+        .left-image {
+          left: 15vw;
+        }
       }
 
 
@@ -500,6 +507,9 @@
       
 </style>
 <body>
+
+{% include 'hotel/_notifications.html' %}
+
     <div class="container" >
         <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: white ;">
             <div class="container-fluid">
@@ -552,10 +562,7 @@
         </div>
 
         <div class="left-image">
-            <img src="{% static 'hotel/img/Group 57.svg' %}" alt=Изображение">
-        </div>
-        <div class="left-image-2">
-            <img src="{% static 'hotel/img/Group 57.svg' %}" alt="Изображение">
+            <img src="{% static 'hotel/img/Group 57.svg' %}" style="margin-left: -40%; margin-top: 50%" alt=Изображение">
         </div>
         <div id="dynamicContent">
             <div id="modalCard" class="modal-card" style="display: none;">
@@ -596,6 +603,9 @@
                 </div>
                 <form id="form_one" method="post" action="{% url 'add-booking' %}">
                     {% csrf_token %}
+<!--                    {% if form.non_field_errors %}-->
+<!--                        <div class="error">{{ form.non_field_errors }}</div>-->
+<!--                    {% endif %}-->
                 <div class="form-group">
                     <label for="last_name">Фамилия гостя:</label>
                     <input type="text" id="last_name" name="last_name" required>
@@ -625,12 +635,15 @@
             </div>
             
             <!-- Карточка с информацией о бронировании -->
-            <div class="booking-form" style="width: 450px; border-radius:15px; margin-top: 10px;">
+            <div class="booking-form" style="width: 450px; border-radius:15px; margin-top: 10px; ">
                 <div class="form-header" style="border-radius: 0 0 15px 15px; width:50%; margin-left: 25%;">
                 Бронирование
                 </div>
                 <form id="form_two" method="post" action="{% url 'add-booking' %}">
                     {% csrf_token %}
+<!--                    {% if form.non_field_errors %}-->
+<!--                        <div class="error">{{ form.non_field_errors }}</div>-->
+<!--                    {% endif %}-->
                 <div class="form-group">
                     <label for="checkin_date">Дата и время прибытия:</label>
                     <input type="text" id="checkin_date" name="checkin_date" required>
@@ -644,8 +657,8 @@
                     <input type="number" id="number_of_guests" name="number_of_guests" min="1" max="10">
                 </div>
                     <div class="form-group">
-                    <label for="number_of_nights">Кол-во гостей:</label>
-                    <input type="number" id="number_of_nights" name="number_of_nights" min="1" max="10">
+                    <label for="number_of_nights">Кол-во ночей:</label>
+                    <input type="number" id="number_of_nights" name="number_of_nights" min="1">
                 </div>
                 <div class="form-group">
                     <label for="room_type">Категория номера:</label>
@@ -662,14 +675,16 @@
                 </form>
             </div>
             </div>
-        
             <!-- Карточка с личными информациями -->
-            <div class="personal-info-card" style="width: 44%; border-radius:15px; ">
+            <div class="personal-info-card" style="width: 44%; border-radius:15px; margin-left: 3%">
             <div class="form-header" style="border-radius: 0 0 15px 15px; width:50%; margin-left: 25%;">
                 Личные информации
             </div>
             <form id="form_three" method="post" action="{% url 'add-booking' %}" style="margin-top: 2%;">
                 {% csrf_token %}
+<!--                {% if form.non_field_errors %}-->
+<!--                    <div class="error">{{ form.non_field_errors }}</div>-->
+<!--                {% endif %}-->
                 <div class="form-group">
                 <label for="country">Гражданство:</label>
                 <input type="text" id="country" name="country" required>
@@ -711,18 +726,18 @@
             <div class="line"></div>
             <button href="" class="nav-link" id="openModal"><label class="balance">Баланс гостя:</label></button>
             <div class="line"></div>
-            <button type="button" id="save-button" class="save-button">СОХРАНИТЬ</button>
+            <button type="submit" id="save-button" class="save-button">СОХРАНИТЬ</button>
         </div>
         <script>
             document.getElementById('toggleButton').addEventListener('click', function() {
                 var contentDiv = document.getElementById('dynamicContent');
-                
+
                 // Проверяем текущее содержимое и меняем его на другое
                 if (contentDiv.innerHTML.includes('Начальное содержимое')) {
                   contentDiv.innerHTML = `
                     <p>Новое содержимое</p>
                     <!-- Дополнительный HTML -->
-                    <div id="modalCard" class="modal-card" style="display: none;">
+                    <div id="modalCardOne" class="modal-card" style="display: none;">
                         <div class="card-header">
                             <div class="card-header-top">
                             <span>БАЛАНС ГОСТЯ</span>
@@ -730,9 +745,9 @@
                             <div class="input-container">
                                 <label for="guestFullName">ФИО Гостя:</label>
                                 <input type="text" id="guestFullName" name="guestFullName" placeholder="Введите полное имя гостя">
-                            </div>                      
+                            </div>
                         </div>
-                                
+
                         <div class="payment-card-body">
                             <div class="payment-details">
                                 <div class="new-payment-section">
@@ -746,12 +761,12 @@
                                 </div>
                             </div>
                         </div>
-                </div>        
+                </div>
 
                   `;
                 } else {
                   contentDiv.innerHTML = `
-                  <div id="modalCard" class="modal-card">
+                  <div id="modalCardTwo" class="modal-card">
                     <div class="card-header">
                         <div class="card-header-top">
                         <span>БАЛАНС ГОСТЯ</span>
@@ -759,9 +774,9 @@
                         <div class="input-container">
                             <label for="guestFullName">ФИО Гостя:</label>
                             <input type="text" id="guestFullName" name="guestFullName" placeholder="Введите полное имя гостя">
-                        </div>                      
+                        </div>
                     </div>
-                            
+
                     <div class="payment-card-body">
                         <div class="payment-details">
                             <div class="new-payment-section">
@@ -779,26 +794,24 @@
                                 <button id="selectpay" name="stayMethod" style="border-radius: 6px 0 0 6px; background-color:white;>
                                     <option value="temporary">Проживание</option>
                                 </button>
-                                <select id="selectpay" name="stayMethod">
-                                    <option value="temporary"> </option>
-                                    <option value="permanent">Наличные</option>
-                                    <option value="permanent">KASPI</option>
-                                    <option value="temporary">HALYK</option>
-                                    <option value="temporary">Безналичные</option>
+                                <select id="payment_method" name="payment_method">
+                                    {% for value, name in payment_method %}
+                                        <option value="{{ value }}">{{ name }}</option>
+                                    {% endfor %}
                                 </select>
-                                <input type="number" min="0" id="selectpay-1" name="stayMethod">
+                                <input type="number" min="0" id="amount" name="stayMethod">
                                </div>
-                            <div class="save-button-1" >Оплата</div>
+                            <button type="button" id="save-button-1" class="save-button-1">Оплата</button>
                         </div>
                         </div>
                     </div>
-            </div>        
+            </div>
                   `;
                 }
               });
-              
+
         </script>
-          
+
 
         <script>
                         // Получение элементов по идентификаторам
@@ -821,6 +834,8 @@
             };
 
         </script>
+
+
  
 <!-- Скрипты для инициализации календарей Pikaday и ClockPicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
@@ -905,6 +920,84 @@
     </div>
 
 <script>
+    // Temporary storage for payment data
+let temporaryPaymentData = {};
+
+// Function to capture payment data on 'Оплата' button click
+function saveTemporaryPaymentData() {
+    temporaryPaymentData = {
+        paymentMethod: document.getElementById('payment_method').value,
+        amount: document.getElementById('amount').value
+    };
+
+    // Ideally, you should validate the payment data here before saving
+
+    // Show a message to the user indicating the payment data has been temporarily saved
+    alert('Данные об оплате временно сохранены.');
+}
+
+document.getElementById('save-button-1').addEventListener('click', saveTemporaryPaymentData);
+
+// Function to handle form submission
+function submitAllData(e) {
+    e.preventDefault();
+
+    // Создаем новый объект FormData
+    var formData = new FormData();
+
+    // Add payment data to the FormData object
+    for (var key in temporaryPaymentData) {
+        formData.append(key, temporaryPaymentData[key]);
+    }
+
+    // Получаем данные из всех трех форм и добавляем в formData
+    var formOne = document.getElementById('form_one');
+    var formTwo = document.getElementById('form_two');
+    var formThree = document.getElementById('form_three');
+
+    for (var key of new FormData(formOne).entries()) {
+        formData.append(key[0], key[1]);
+    }
+    for (var key of new FormData(formTwo).entries()) {
+        formData.append(key[0], key[1]);
+    }
+    for (var key of new FormData(formThree).entries()) {
+        formData.append(key[0], key[1]);
+    }
+
+    // Указываем адрес для отправки данных формы
+    var actionUrl = formOne.action;
+
+
+    // Отправляем данные формы на сервер
+    fetch(actionUrl, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken') // Получаем CSRF-токен с помощью функции getCookie
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json(); // Получаем ответ от сервера в формате JSON
+        } else {
+            throw new Error('Сетевой ответ был не ok.');
+        }
+    })
+    .then(data => {
+        if (data.redirect_url) {
+            window.location.href = data.redirect_url; // Если в ответе есть URL для перенаправления, перенаправляем туда
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+    });
+}
+
+// Attach the submitAllData function to the 'Сохранить' button
+document.getElementById('save-button').addEventListener('click', submitAllData);
+
+
 // Функция для получения значения cookie
 function getCookie(name) {
     let cookieValue = null;
@@ -921,52 +1014,11 @@ function getCookie(name) {
     return cookieValue;
 }
 
-// Обработчик нажатия на кнопку сохранения
-document.getElementById('save-button').addEventListener('click', function() {
-    var formData = new FormData();
 
-    // Добавляем данные из всех трёх форм
-    var formOne = document.getElementById('form_one');
-    var formTwo = document.getElementById('form_two');
-    var formThree = document.getElementById('form_three');
 
-    // Для каждой формы перебираем поля и добавляем их в formData
-    new FormData(formOne).forEach(function(value, key){
-        formData.append(key, value);
-    });
-    new FormData(formTwo).forEach(function(value, key){
-        formData.append(key, value);
-    });
-    new FormData(formThree).forEach(function(value, key){
-        formData.append(key, value);
-    });
 
-    // Получаем CSRF-токен из cookies
-    var csrftoken = getCookie('csrftoken');
-
-    // Отправляем запрос на сервер
-    fetch('{% url "add-booking" %}', { // Убедитесь, что адрес соответствует вашему URL в Django
-        method: 'POST',
-        body: formData,
-        headers: {
-            'X-CSRFToken': csrftoken, // Устанавливаем заголовок с CSRF-токеном
-        },
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Сетевой ответ не ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Успех:', data);
-        // Здесь можно добавить действия после успешной отправки, например, перенаправление
-    })
-    .catch((error) => {
-        console.error('Ошибка:', error);
-    });
-});
 </script>
+
 
 
 <script>

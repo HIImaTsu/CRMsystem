@@ -10,186 +10,22 @@
     <title>Continental</title>
 </head>
 <body>
-    <style>
-        body {
-            background-color: #f1eeee;
-        }
-
-        #btn_booking_1 {
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 1px;
-            margin-top: 5px;
-            width: 290px;
-            height: 40px;
-        }
-
-        #btn_booking_1 p {
-            margin-top: -19px;
-            margin-right: -15px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_2{
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 1px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_3{
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 55px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_4{
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 110px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_5{
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 165px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_6 {
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 220px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #btn_booking_7 {
-            border: none;
-            background-color: #4B596B;
-            padding: 1px 2px;
-            display: inline-block;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 6px 6px;
-            margin-left: 271px;
-            margin-top: 5px;
-            width: 155px;
-            height: 40px;
-            text-align: center;
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 16px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #img-booking {
-            width: 15px;
-            height: 15px;
-            margin-top: 5px;
-            margin-left: -220px;
-        }
-
-        #img-scroll-booking {
-            width: 15px;
-            height: 15px;
-            margin-top: -82px;
-            margin-left: 240px;
-        }
-    </style>
-    <div class="container" >
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: white ;">
+{% block navbar %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: white ;">
             <div class="container-fluid">
-            <a class="navbar-brand" href="/homePage.html"><img src="/img/Group.svg" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" >
                     <a class="nav-link active" aria-current="page" href="#">/</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/homePage.html"> Rixos Borovoe Hotel</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"> Rixos Borovoe Hotel</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link" href="#">/</a>
                 </li>
                 <li class="nav-item" >
-                    <a class="nav-link space" href="/bookingPage.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                    <a class="nav-link space" href="{% url 'booking' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
                         Размещение броней
                     </a>
                 </li>
@@ -197,21 +33,21 @@
             <div class="navbar">
                 <ul class="navbar-nav me-auto  mb-lg-0">
                     <li class="nav-item">
-                        <a href=""><img src="/img/Помощь.svg" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/helpPage.html" style="margin-right: 12px;">Помощь</a>
+                        <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a href=""><img src="/img/Настройки.svg" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-link space" href="/accountPage.html" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                        <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
                         Настройка
                         </a>
                     </li>
                     <li>
-                        <a href=""><img src="/img/Профиль.svg" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
                         <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
@@ -221,38 +57,7 @@
             </div>
             </div>
         </nav>
-        <div class="row">
-            <div class="col-6 md-12" style="width:320px;">
-                <button id="btn_booking_1"><img src="/img/calendar_booking.svg" alt="" id="img-booking"> <p>Выбрать даты</p> <img src="/img/scroll_booking.svg" alt="" id="img-scroll-booking"></button>
-            </div>
-            <div class="col-6 md-12">
-                <div class="row">
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_2">Выбывающие</button>
-                    </div>
-
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_3">Выбывшие</button>
-                    </div>
-
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_4">Проживающие</button>
-                    </div>
-
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_5">Свободные</button>
-                    </div>
-
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_6">Заезжающие</button>
-                    </div>
-
-                    <div class="col-2 md-12">
-                        <button id="btn_booking_7">Заехавшие</button>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
+{% endblock navbar %}
+{% block content %}
+{% endblock content %}
 </body>
