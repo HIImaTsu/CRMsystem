@@ -1,12 +1,12 @@
 # continental
 
-user: adilet
+user1: adilet
 
 pass: 12345678abc
 
 
 
-user: almir
+user2: almir
 
 pass: abc12345678
 
