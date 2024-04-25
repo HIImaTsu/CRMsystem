@@ -439,7 +439,7 @@
                         <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
+                        <a href="{% url 'cabinet' %}"><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
@@ -447,10 +447,10 @@
                         </a>
                     </li>
                     <li>
-                        <a href=""><img src="{% static 'hotel/img/PROFile.svg' %}" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
+                        <a href="#" class="nav-link" style="margin-right: 12px;">{{ username }}</a>
                        
                     </li>
                 </ul>
@@ -589,26 +589,6 @@
 
   // Обновленные данные для записей с поддержкой нескольких броней на одну дату
   const entries = {
-    '2024-03-04': [
-      { text: 'Nurtas Almir', color: 'bg-green-300' },
-      // Предполагаемая вторая запись на ту же дату
-      { text: 'Забронирован', color: 'bg-red-300' }
-    ],
-    '2024-03-05': [
-      { text: 'Nurtas Almir', color: 'bg-green-300' },
-      // Предполагаемая вторая запись на ту же дату
-      { text: 'Забронирован', color: 'bg-red-300' }
-    ],
-    '2024-03-06': [
-      { text: 'Nurtas Almir', color: 'bg-green-300' },
-      // Предполагаемая вторая запись на ту же дату
-      { text: 'Забронирован', color: 'bg-red-300' }
-    ],
-    '2024-03-03': [
-      { text: 'Рахат', color: 'bg-blue-300' },
-      // Предполагаемая вторая запись на ту же дату
-      { text: 'Рахат-2', color: 'bg-blue-300' }
-    ],
     // Добавьте больше дат и записей по мере необходимости...
   };
 

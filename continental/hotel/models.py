@@ -51,7 +51,6 @@ class Booking(models.Model):
         CHECKING_IN = 'I', _('Заезжающий')
         STAYING = 'S', _('Проживающий')
         CHECKED_OUT = 'O', _('Выехавший')
-
     class ArrivalMethod(models.TextChoices):
         BY_AIR = 'AIR', _('Аэропорт')
         BY_TRAIN = 'TRAIN', _('ЖД-пути')
@@ -65,6 +64,8 @@ class Booking(models.Model):
     checkin_date = models.DateTimeField(null=False, blank=False)
     checkout_date = models.DateTimeField(null=False, blank=False)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=1000)
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
+    time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
     def __str__(self):
         return f"{self.guest.first_name} {self.guest.last_name} - Booking ID: {self.id}"
