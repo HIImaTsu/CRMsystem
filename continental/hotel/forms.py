@@ -4,6 +4,7 @@ from .models import *
 class LoginUserForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+    remember = forms.BooleanField(required=False)
 
 class AddGuestForm(forms.ModelForm):
     class Meta:
@@ -16,8 +17,7 @@ class AddGuestProfileForm(forms.ModelForm):
         fields = ['iin', 'document_number', 'document_date', 'deadline_of_document', 'country']
 
 class AddBookingForm(forms.ModelForm):
-    room_type = forms.ModelChoiceField(queryset=RoomType.objects.none(), required=True,)
-
+    room_type = forms.ModelChoiceField(queryset=RoomType.objects.all(), required=True,)
     class Meta:
         model = Booking
         fields = ['checkin_date', 'checkout_date', 'number_of_guests',

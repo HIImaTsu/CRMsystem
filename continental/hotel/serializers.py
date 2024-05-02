@@ -5,10 +5,10 @@ from .models import *
 class GuestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Guest
-        fields = ['first_name', 'last_name', 'phone']  # Включите необходимые поля
+        fields = ['first_name', 'last_name', 'phone']
 
 class BookingSerializer(serializers.ModelSerializer):
-    guest_info = GuestSerializer(source='guest')  # Добавляем информацию о госте
+    guest_info = GuestSerializer(source='guest')
 
     class Meta:
         model = Booking

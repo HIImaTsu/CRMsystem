@@ -44,7 +44,7 @@ class RoomType(models.Model):
     capacity = models.IntegerField()
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.hotel.name})"
 
 class Booking(models.Model):
     class Status(models.TextChoices):
@@ -64,8 +64,6 @@ class Booking(models.Model):
     checkin_date = models.DateTimeField(null=False, blank=False)
     checkout_date = models.DateTimeField(null=False, blank=False)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=1000)
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
-    time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
     def __str__(self):
         return f"{self.guest.first_name} {self.guest.last_name} - Booking ID: {self.id}"
@@ -76,20 +74,13 @@ class Booking(models.Model):
         if self.checkin_date > self.checkout_date:
             raise ValidationError(_('Дата заезда должна быть раньше даты выезда.'))
 
-    def save(self, *args, **kwargs):
-        if not self.room_id:  # Проверяем, что поле room не заполнено
-            default_room = Room.objects.get(id=2)  # Получаем объект комнаты по умолчанию
-            self.room = default_room
-        super().save(*args, **kwargs)
-
-
 class Room(models.Model):
     hotel = models.ForeignKey('Hotel', on_delete=models.PROTECT, related_name='rooms')
     type = models.ForeignKey('RoomType', on_delete=models.PROTECT, related_name='rooms')
     room_number = models.IntegerField()
 
     def __str__(self):
-        return f"{self.room_number} ({self.hotel.name})"
+        return f"{self.room_number} {self.type} ({self.hotel.name}) "
 
     class Meta:
         unique_together = (('hotel', 'room_number'),)    # для уникальности номеров в отеле
