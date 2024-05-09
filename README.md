@@ -4,7 +4,7 @@
 This graphical CRM system automates processes related to booking and room management. It allows the hotel's internal staff to make advance reservations, monitor guest arrivals, departures, and stays, and track payments. The system integrates various hotel departments (such as booking, housekeeping, and reception) into a single system, enabling data-driven reporting. Its simple interface and intuitive functionality ensure ease and flexibility of use.
 
 ## Website Performance Check
-You can check the performance of our website at: [http://13.51.5.143/](http://13.51.5.143/)
+You can check the performance of our website at: [http://13.51.5.143/login/](http://13.51.5.143/login/)
 
 ## Installation and Setup
 
