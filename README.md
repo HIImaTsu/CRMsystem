@@ -1,10 +1,10 @@
 ## continental - CRM-system for hotel
 
-1. Графическая CRM-система для автоматизации работы при оформлении бронирования и номеров. Этот проект позволяет внутренним сотрудникам отеля осуществлять предварительное бронирование, а также контролировать заезд, выезд и пребывание гостя, отслеживая оплату. Благодаря системе каждый отдел отеля (например, отдел бронирования, служба уборки номеров, стойка регистрации) может быть собран в одной системе и составлять отчеты по данным, хранящимся в базе данных. Простой интерфейс и понятный функционал обеспечат удобство и гибкость работы с данной системой.
+1. A graphical CRM system for automating work when making reservations and rooms. This project allows the hotel's internal staff to make advance reservations, as well as monitor the arrival, departure and stay of the guest, tracking the payment. Thanks to the system, each department of the hotel (for example, the booking department, the housekeeping service, the reception desk) can be assembled in one system and make reports on the data stored in the database. A simple interface and intuitive functionality will ensure the convenience and flexibility of working with this system.
 
 
-2. Проверить работоспособность нашего сайта можно через адрес: http://13.51.5.143/
-3. Логины для входа:
+2. You can check the performance of our website via the address: http://13.51.5.143/
+3. Logins to log in:
    
 - user1: adilet
 pass: 12345678abc
@@ -12,38 +12,37 @@ pass: 12345678abc
 - user2: almir
 pass: abc12345678
 
-4. Если у вас возникнут вопросы, свяжитесь со мной по адресу 200103319@stu.sdu.edu.kz
+4. If you have any questions, please contact me at 200103319@stu.sdu.edu.kz
 
-# PART ONE
+# FRONT-END
 
 bookingpage.html:
-   - Этот файл отвечает за страницу бронирования номеров. Здесь пользователи могут просматривать доступные номера, добавлять новые брони, редактировать существующие брони и отменять их при необходимости.
+   - This file is responsible for the room reservation page. Here users can view available rooms, add new bookings, edit existing bookings and cancel them if necessary.
      
 reservationpage.html:
-   - Этот файл отвечает за страницу создания новой брони. Здесь пользователи могут указать информацию о гостях, выбрать даты пребывания, уточнить цену номеров и другие детали бронирования.
+   - This file is responsible for the page for creating a new reservation. Here users can specify information about guests, select dates of stay, specify the price of rooms and other booking details.
 
 nightauditpage.html:
-   - Этот файл отвечает за страницу ночного аудита в гостинице. Здесь администраторы могут просматривать данные о текущих бронях, доходах, свободных номерах и другую информацию, необходимую для анализа работы гостиницы.
+   - This file is responsible for the overnight audit page at the hotel. Here, administrators can view data on current bookings, income, available rooms and other information necessary to analyze the operation of the hotel.
 
 accountpage.html:
-   - Этот файл отвечает за страницу управления аккаунтом пользователей. Здесь пользователи могут редактировать свои личные данные, изменять пароли и управлять другими настройками своего аккаунта.
+   - This file is responsible for the user account management page. Here users can edit their personal data, change passwords and manage other settings of their account.
 
-Функциональность
-- Бронирование номеров: Пользователи могут просматривать доступные номера, добавлять новые брони, редактировать и отменять их.
-- Создание новой брони: Пользователи могут указать информацию о гостях, даты пребывания и другие детали для создания новой брони.
-- Ночной аудит: Администраторы могут просматривать данные о текущих бронях, доходах и другой статистике для управления работой гостиницы.
-- Управление аккаунтом: Пользователи могут редактировать личные данные, изменять пароли и управлять настройками своего аккаунта.
+Functionality
+- Room Reservations: Users can view available rooms, add new bookings, edit and cancel them.
+- Create a new reservation: Users can specify information about guests, dates of stay and other details to create a new reservation.
+- Night audit: Administrators can view data on current bookings, income and other statistics to manage the operation of the hotel.
+- Account Management: Users can edit personal data, change passwords and manage their account settings.
 
   # BACK-END
 
-  Структура: 2 приложения. 
-- Первое приложение, Continental, создано самим Джанго для конфигураций и настроек нашего проекта и последующей работы с сервером. 
-- Второе приложение, Hotel, уже является основным содержашим функционал всего проекта, было решено не разделять часть с логином для более простой работы с самим приложением. Внутри него созданы директории с шаблонами проекта и статическими файлами, и картинками скриптами и стилями.
--	Внутри директорий static и templates были созданы новые папки для хранения файлов в них, это было создано для того чтобы когда проект загружался и проект развертывался на хостинге статические файлы и шаблоны разных приложений не смешивались и было понимание к каким приложениям принадлежат файлы (если в будущем будут созданы дополнительные приложения). 
-- serializers.py – Нужно для преобразования данных из моделей в формат json для работы некоторых скриптов и функций (в основном для страницы размещения броней).
-- urls.py - файл с машрутами для отработки опредленных запросов серверу
-- views.py - паттерн MTV (Models, Views, Templates) - представления которые отвечают за то как должна выглядеть страница запрашиваемая пользователем 
-- models.py - файл с таблицам данных, важаная часть CRM-системы
-- forms. py - файл для работы с формами
-
+  Structure: 2 applications. 
+- The first application, Continental, was created by Django himself for the configurations and settings of our project and subsequent work with the server. 
+- The second application, Hotel, is already the main content of the functionality of the entire project, it was decided not to share the part with the login for easier work with the application itself. Directories with project templates and static files, and pictures, scripts and styles are created inside it.
+- New folders were created inside the static and templates directories to store files in them, this was created so that when the project was uploaded and the project was deployed on the hosting, static files and templates of different applications would not mix and there would be an understanding of which applications the files belong to (if additional applications are created in the future). 
+- serializers.py – It is necessary to convert data from models to json format for some scripts and functions to work (mainly for the armor placement page).
+- urls.py - a file with routes for processing specified requests to the server
+- views.py - MTV pattern (Models, Views, Templates) - views that are responsible for how the page requested by the user should look like 
+- models.py - a file with data tables, an important part of the CRM system
+- forms. py file for working with forms
    
