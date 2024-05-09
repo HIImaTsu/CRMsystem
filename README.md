@@ -1,18 +1,55 @@
-## continental - CRM-system for hotel
+# CRM System for Hotel Management
 
-1. A graphical CRM system for automating work when making reservations and rooms. This project allows the hotel's internal staff to make advance reservations, as well as monitor the arrival, departure and stay of the guest, tracking the payment. Thanks to the system, each department of the hotel (for example, the booking department, the housekeeping service, the reception desk) can be assembled in one system and make reports on the data stored in the database. A simple interface and intuitive functionality will ensure the convenience and flexibility of working with this system.
+## Project Description
+This graphical CRM system automates processes related to booking and room management. It allows the hotel's internal staff to make advance reservations, monitor guest arrivals, departures, and stays, and track payments. The system integrates various hotel departments (such as booking, housekeeping, and reception) into a single system, enabling data-driven reporting. Its simple interface and intuitive functionality ensure ease and flexibility of use.
 
+## Website Performance Check
+You can check the performance of our website at: [http://13.51.5.143/](http://13.51.5.143/)
 
-2. You can check the performance of our website via the address: http://13.51.5.143/
-3. Logins to log in:
-   
-- user1: adilet
-pass: 12345678abc
+## Installation and Setup
 
-- user2: almir
-pass: abc12345678
+### 1. Cloning the Repository
+Clone the repository to your computer:
+```bash
+git clone https://github.com/HIImaTsu/CRMsystem.git
+cd CRMsystem
+```
 
-4. If you have any questions, please contact me at 200103319@stu.sdu.edu.kz
+### 2. Setting Up the Virtual Environment
+- Create a virtual environment:
+  ```bash
+  python -m venv venv
+  ```
+- Activate the virtual environment:
+  ```bash
+  venv\Scripts\activate
+  ```
+
+### 3. Installing Dependencies
+Install the necessary dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Running the Server
+Navigate to the `CRMsystem\continental` directory and start the server:
+```bash
+python manage.py runserver
+```
+
+## Login Credentials
+- **User 1:**
+  - Username: adilet
+  - Password: 12345678abc
+
+- **User 2:**
+  - Username: almir
+  - Password: abc12345678
+
+## Contact
+If you have any questions, please contact me at [200103319@stu.sdu.edu.kz](mailto:200103319@stu.sdu.edu.kz)
+
+This text can be copied directly into your README.md file. It includes all the necessary instructions and is formatted for ease of use and clarity, specifically tailored for users on Windows operating systems.
 
 # FRONT-END
 
