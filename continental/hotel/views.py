@@ -135,7 +135,13 @@ def house_keeping(request):
 
 @login_required()
 def booking(request):
-    return render(request, 'hotel/bookingPage.html', {'username': request.user.username})
+    staff_member = Staff.objects.get(user=request.user)
+    hotel_id = staff_member.hotel.id
+    rooms = Room.objects.filter(hotel__id=hotel_id)
+    return render(request, 'hotel/bookingPage.html', {
+        'username': request.user.username,
+        'rooms': rooms,
+    })
 
 @login_required()
 def night_audit(request):

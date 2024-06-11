@@ -439,7 +439,7 @@
                         <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'cabinet' %}"><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
+                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
@@ -491,51 +491,13 @@
                         </div>                        
                     </tr>
                     <!-- Повторите <tr> для каждой строки таблицы -->
-                        <tr >
-                            <td>01</td>
-                            <td>Стандарт</td>
+                        {% for room in rooms %}
+                        <tr>
+                            <td>{{ room.room_number }}</td>
+                            <td>{{ room.type }}</td>
                             <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>02</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>03</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>04</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>05</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>06</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>08</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>09</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
-                          <tr>
-                            <td>10</td>
-                            <td>Стандарт</td>
-                            <td><div class="status-circle"></div></td>
-                          </tr>
+                        </tr>
+                        {% endfor %}
                   </table>
                   
             </div>

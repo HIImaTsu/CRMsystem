@@ -12,7 +12,7 @@ class BookingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Booking
-        fields = ['guest_info', 'checkin_date', 'checkout_date', 'number_of_guests']
+        fields = ['guest_info', 'checkin_date', 'checkout_date', 'room']
 
 
 

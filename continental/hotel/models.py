@@ -44,7 +44,7 @@ class RoomType(models.Model):
     capacity = models.IntegerField()
 
     def __str__(self):
-        return f"{self.name} ({self.hotel.name})"
+        return self.name
 
 class Booking(models.Model):
     class Status(models.TextChoices):
