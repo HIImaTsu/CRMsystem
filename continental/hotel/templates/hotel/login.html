@@ -21,7 +21,7 @@
             <div class="col-6 md-12" id="log-col-2">
                 
                 <div class="login-container" style="font-family: Arial, sans-serif; border-radius: 5px; max-width: 500px;">
-                    <img src="/img/Frame.svg" alt="">
+                    <img src="{% static 'hotel/img/Frame.svg' %}" alt="">
                     <h1 style="text-align: center; color: #333; margin-bottom: 40px; margin-right: 80px">Вход в аккаунт</h1>
                     <form action="{% url 'login' %}" method="post">
                         {% csrf_token %}
@@ -37,7 +37,7 @@
                         <input type="checkbox" id="remember" name="remember" style="margin-right: 5px;">
                         <label for="remember">Запомнить меня на этом компьютере</label>
                     </div>
-                    <a href="{% url 'home' %}"><button type="submit" class="login-btn" scr="/homePage.html" style="background-color: #5F7DA5; color: white; padding: 10px 20px; margin: 10px 0; border: none; cursor: pointer; width: 100%; border-radius: 3px;">Войти</button></a>
+                    <a href="{% url 'home' %}"><button type="submit" class="login-btn" scr="" style="background-color: #5F7DA5; color: white; padding: 10px 20px; margin: 10px 0; border: none; cursor: pointer; width: 100%; border-radius: 3px;">Войти</button></a>
                     </form>
                     <a href="{% url 'help' %}" class="support" style="text-align: center; display: block; color: #555; font-size: 0.9em; text-decoration: none;">Возникли проблемы со входом? Поддержка.</a>
                 </div>
