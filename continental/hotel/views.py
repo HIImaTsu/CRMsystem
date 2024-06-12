@@ -59,9 +59,11 @@ def add_booking(request):
                     messages.success(request, 'Новый гость и профиль успешно созданы. Бронь зарезервирована')
                 else:
                     messages.error(request, 'Ошибка в данных профиля.')
+                    print("Profile Form Errors:", profile_form.errors)
                     return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
             else:
                 messages.error(request, 'Ошибка в данных гостя.')
+                print("Guest Form Errors:", guest_form.errors)
                 return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
 
             # Создаем новую бронь
@@ -88,9 +90,8 @@ def add_booking(request):
                 messages.error(request, 'Свободных номеров на выбранные даты нету')
                 return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
         else:
-            # print("Booking Form Errors:", booking_form.errors)
-            # print("Guest Form Errors:", guest_form.errors)
             messages.error(request, 'Ошибка в данных бронирования.')
+            print("Booking Form Errors:", booking_form.errors)
             return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
 
     else:
@@ -167,6 +168,9 @@ def cabinet(request):
 
 def help_page(request):
     return render(request, 'hotel/helpPage.html', {'username': request.user.username})
+
+def reports(request):
+    return render(request, 'hotel/reportsPage.html', {'username': request.user.username})
 
 
 def login_user(request):

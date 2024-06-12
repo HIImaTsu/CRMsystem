@@ -12,5 +12,6 @@ urlpatterns = [
     path('add-booking/', add_booking, name='add-booking'),
     path('night-audit/', night_audit, name='night-audit'),
     path('cabinet/', cabinet, name='cabinet'),
+    path('reports/', reports, name='reports'),
     path('api/bookings/', booking_data, name='api_bookings'),
 ]

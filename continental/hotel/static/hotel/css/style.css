@@ -1,3 +1,4 @@
+
 #nav-bar {
     width: 1412px;
     height: 103px;
@@ -35,7 +36,7 @@
 
 .login-container {
     margin-left: 200px;
-    margin-top: 220px;
+    margin-top: 180px;
     background-color: rgb(255, 255, 255);
 }
 
@@ -64,13 +65,13 @@
 }
 
 #body-helpPage {
-    background-image: url(/static/hotel/img/illustration_of_new_reservation.svg);
+    background-image: url(/img/иллюстрация_создание_новой_брони.svg);
     width: 1500px;
 }
 
 #body-nightAudit {
     background-color: #4E5C6E;
-    background-image: url(/static/hotel/img/Nochnoi-audit-domiki.svg);
+    background-image: url(/img/Ночной-Аудит_домики.svg);
     background-repeat: no-repeat;
     background-size: 672px 478px;
     background-position: 35px 400px;

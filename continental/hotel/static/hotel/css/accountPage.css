@@ -1,0 +1,300 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  background: #FFFFFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px auto;
+  position: relative;
+  width: 300px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header span {
+  font-size: 16px;
+}
+
+.card-header svg {
+  transform: rotate(0deg);
+  transition: transform 0.3s ease;
+}
+
+.card-content.visible {
+  display: block;
+}
+
+.toggle {
+  cursor: pointer;
+}
+
+.arrow-down {
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.arrow-up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.btn {
+  background-color: #4E5C6E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  margin-left: 600px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 350px;
+}
+
+.btn-2 {
+  background-color: #4E5C6E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.btn-3 {
+  background-color: #4E5C6E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-left: 73px;
+}
+
+.password-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.password-field {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.password-field input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-field label {
+  display: block;
+}
+
+.show-password {
+  position: absolute;
+  right: 10px;
+  top: 55px;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.show-password:focus {
+  outline: none;
+}
+
+.show-password::before {
+  content: url(/img/off.svg);
+  font-size: 16px;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group svg {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.accordion {
+  background-color: #ffffff;
+  color: #444;
+  cursor: pointer;
+  margin-left: 38px;
+  padding: 18px;
+  width: 930px;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin-bottom: 0;
+  border: 0.9px solid #000000;
+  border-radius: 15px;
+}
+
+.active, .accordion:hover {
+  background-color: #ffffff;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  display: none;
+  overflow: hidden;
+}
+
+.panel.show {
+  display: block;
+}
+
+.left-img {
+  position: absolute;
+  top: 36vh;
+  left: 42vw;
+  z-index: 1;
+  transform: rotate(270deg);
+  height: 52vw;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.left-img-2 {
+  position: absolute;
+  top: 36vh;
+  left: 56.5vw;
+  z-index: 1;
+  transform: rotate(270deg);
+  height: 52vw;
+  position: absolute;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
+  #account-main-cont {
+      flex-direction: column;
+  }
+
+  #account-profile-col, #account-space-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+  }
+
+  #account-profile-col {
+      margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-nav .nav-item .nav-link {
+      font-size: 16px;
+  }
+
+  #img-help {
+      width: 30px;
+      height: 30px;
+  }
+
+  #img-account-profile {
+      width: 80px;
+  }
+
+  .account-text-profile {
+      font-size: 16px;
+  }
+
+  .password-field input[type="password"] {
+      width: calc(100% - 35px);
+  }
+
+  .password-field .show-password {
+      width: 20px;
+      height: 20px;
+  }
+
+  .btn {
+      padding: 8px 16px;
+      margin-left: 0;
+      width: 100%;
+  }
+
+  .btn-3 {
+      margin-left: 0;
+      width: 100%;
+  }
+
+  .left-img, .left-img-2 {
+      width: 80px;
+      top: auto;
+      left: auto;
+      height: auto;
+      transform: rotate(0deg);
+      z-index: -1;
+  }
+
+  .accordion {
+      width: 100%;
+      margin-left: 0;
+  }
+}

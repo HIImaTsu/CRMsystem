@@ -1,0 +1,482 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+
+  .card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      margin-left: 310px;
+      margin-top: 10px;
+      padding: 0;
+      background-color: #D9D9D9;
+      border-radius: 15px;
+    }
+
+
+    .upper-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .form-container, .booking-form {
+      background: #fff;
+      width: calc(50% - 10px); /* Адаптация к размеру gap */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .personal-info-card {
+      margin-right: 490px;
+      margin-block-end: 10px;
+      background: #fff;
+      width: 44%; /* Занимает всю ширину */
+      max-width: none; /* Убираем ограничение по ширине */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  .form-header {
+    background: #4B596B;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .form-header-1 {
+    background: #5F7DA5;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+  }
+
+  .form-group {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    margin: 5px;
+    align-items: center;
+  }
+
+  .form-group label {
+    text-align: right;
+    padding-right: 20px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 80%;
+    padding: 2px;
+    margin-bottom: 1px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  #selectpay {
+    width: 80%;
+    padding: 2px;
+    margin-bottom: 1px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  #selectpay-1 {
+    height: 40px;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+
+  .form-group button {
+    padding: 5px 5px;
+    border: none;
+    background: #5C7AEA;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .form-group button:hover {
+    background: #4257b2;
+  }
+  @media (max-width: 768px) {
+      .upper-cards {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .form-container, .booking-form {
+        width: 100%; /* Карточки будут занимать всю ширину на мобильных устройствах */
+      }
+      .left-image {
+          /* Optionally, you can adjust the image positioning or hide it on smaller screens */
+          left: 10vw; 
+      }
+  }
+
+  @media (min-width: 1024px) {
+    .left-image {
+      /* Further adjustments for even larger screens if needed */
+      left: 15vw; /* Position 15% from the left of the viewport on larger screens */
+    }
+  }
+
+  /* Стили для календаря */
+  .calendar-icon {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+    cursor: pointer;
+  }
+
+  .input-with-icon {
+    position: relative;
+  }
+
+  .input-with-icon input {
+    padding-right: 40px; /* Убедитесь, что текст не будет перекрываться иконкой календаря */
+  }
+
+  .info-panel-item {
+    margin: 0;
+    padding: 10px 50px;
+    margin-left: 20px;
+    margin-block-end: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 6px;
+  }
+
+  .info-panel-item:not(:last-child) {
+    margin-right: 20px; /* Отступ для всех элементов, кроме последнего */
+  }
+
+  .info-panel-item label {
+    font-weight: bold;
+    margin-right: 10px; /* Отступ между label и линией */
+  }
+
+  .line {
+    margin-top: 30px;
+    width: 150px; /* Линия растягивается для заполнения пространства */
+    border-bottom: 2px solid #000;
+    text-align: center; /* Текст по центру линии */
+  }
+
+  .info-panel-item span {
+    display: inline-block; /* Для возможности установки padding */
+    background: #fff;
+    padding: 0 10px; /* Отступы вокруг текста */
+    position: relative; /* Относительное позиционирование для наложения на линию */
+    top: -10px; /* Поднять текст вверх для выравнивания с линией */
+    transform: translateY(-50%); /* Дополнительное выравнивание по вертикали */
+  }
+
+  .save-button {
+    margin-left: 30px;
+    padding: 15px 30px;
+    background-color: #5F7DA5;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap; /* Не переносить текст кнопки */
+    font-weight: 10px bold;
+  }
+
+  .save-button-1 {
+    width: 140px;
+    margin-left: 440px;
+    margin-top: 110px;
+    padding: 20px 15px;
+    background-color: #5F7DA5;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    white-space: nowrap; /* Не переносить текст кнопки */
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+
+  .save-button:hover {
+    background-color: #3a5c8c;
+  }
+
+  .save-button-1:hover {
+    background-color: #3a5c8c;
+  }
+
+  .balance {
+      margin-left: 10px;
+  }
+  .left-image {
+    position: absolute;
+    top: 14vh; /* Position 10% from the top of the viewport */
+    left: 6.9vw; /* Position 5% from the left of the viewport */
+    z-index: 1;
+  }
+
+  .left-image img {
+    width: 20vw ; /* This will ensure the image's width is auto-adjusted */
+    max-height: 85.5vh; /* This will limit the image's height to 80% of the viewport height */
+  }
+
+  .modal-card {
+    position: fixed; /* или `absolute`, если нужно позиционировать внутри конкретного контейнера */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Чтобы карточка была поверх других элементов */
+    background-color: #fff;
+    padding: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%; /* или фиксированная ширина */
+    height: 90%;
+    max-width: 700px;
+    max-height: 600px;
+    /* Дополнительная стилизация */
+  }
+  
+  /* Стили для фона, который затемняет остальную часть страницы */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+  }
+  
+  .payment-card-container {
+    font-family: Arial, sans-serif;
+    width: 100%;
+    max-width: 600px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .card-header {
+    color: white;
+    padding: 0;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    text-align: center; /* Центрирование текста */
+  }
+  
+  .card-header-top {
+    width: 250px;
+    height: 40px;
+    margin-left: 220px;
+    background-color: #5F7DA5;
+    margin-bottom: 10px; /* Отступ от верхней части карточки */
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 0 0 15px 15px;
+  }
+  
+  .card-header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Распределение пространства между элементами */
+    color:  #696969;
+    margin-right: 130px;
+    margin-bottom: 10px;
+  }
+  
+  .back-icon {
+    margin-right: 100px;
+    font-size: larger;
+    cursor: pointer;
+    flex-grow: 1; /* Позволяет иконке назад занять все доступное пространство слева */
+  }
+  
+  .room-info {
+    margin-right: 30px;
+    display: flex;
+    justify-content: flex-end; /* Выравнивание информации о комнате по правому краю */
+    flex-grow: 2; /* Информация о комнате занимает двойное свободное пространство справа */
+  }
+
+  .pay-info {
+    margin-right: 30px;
+    display: flex;
+    /* Выравнивание информации о комнате по правому краю */
+    flex-grow: 2; /* Информация о комнате занимает двойное свободное пространство справа */
+  }
+
+  
+  #pay-span1 {
+    margin-right: 150px;
+  }
+
+  #pay-span2 {
+    margin-right: 10px;
+  }
+
+  #pay-span3 {
+    margin-left: 75px;
+  }
+  
+  .room-info > span {
+    margin-left: 15px; /* Отступ между элементами информации о комнате */
+  }
+  
+  
+  
+  .payment-card-body {
+    padding: 5px;
+    
+  }
+  
+  .payment-details {
+    background-color: #D9D9D9;
+    border: 1px solid #CCCCCC;
+    padding: 10px;
+    border-radius: 8px;
+    height: 400px;
+    margin: 30px;
+  }
+  
+  .payment-details label {
+    font-weight: bold;
+  }
+  
+  .payment-details input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+  }
+  
+  .new-payment-section {
+    text-align: center;
+  }
+  
+  .new-payment-button {
+    background: #D9D9D9;
+    color: #000;
+    margin: 20px;
+    padding: 1px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    margin-right: 500px;
+    white-space: nowrap;
+  }
+  
+  .payment-status {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    margin-block-end: 40px;
+  }
+  
+  .payment-options {
+    display: flex;
+    justify-content: center;
+    height: 40px;
+  }
+  
+  .payment-option-button {
+    background: #F3F3F3;
+    border: 1px solid #CCCCCC;
+    padding: 10px 20px;
+    margin: -5px;
+    cursor: pointer;
+  }
+  
+  .payment-option-button:hover {
+    background: #E0E0E0;
+  }
+  
+  .input-container {
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* или любой другой отступ, который вы хотите добавить */
+    color: #696969;
+  }
+  
+  .input-container label {
+    margin-right: 10px; /* Расстояние между label и input */
+    font-weight: bold; /* Жирное начертание текста */
+  }
+  
+  .input-container input {
+    width: 440px;
+    padding: 5px;
+    border: 1px solid #ccc; /* Серая граница */
+    border-radius: 4px; /* Слегка скругленные углы */
+    font-size: 16px; /* Размер шрифта input */
+  }
+  
+  .payment-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Для отступа от кнопки ОПЛАТА */
+  }
+  
+  .payment-header {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .payment-fields select,
+  .payment-fields input {
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  #newPaymentButton {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #newPaymentButton:hover {
+    background-color: #0056b3;
+  }
+  
+  #payButton {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: none; /* Скрыта по умолчанию */
+  }
+  
+  #payButton:hover {
+    background-color: #218838;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
