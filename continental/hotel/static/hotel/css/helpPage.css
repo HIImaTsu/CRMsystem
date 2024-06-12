@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1eeee;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-container {
+    margin-bottom: 20px;
+}
+
+#help-page-cont {
+    padding: 10px;
+}
+
+#helpPage-icon, #img-help-logo {
+    display: block;
+    margin: 0 auto;
+}
+
+#helpPage-icon {
+    margin-left: 5px;
+}
+
+#help-page-table {
+    margin-top: 20px;
+}
+
+#help-page-table h4 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.accordion {
+    background-color: #ffffff;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+    margin-bottom: 0; /* Убираем отступы между кнопками аккордеона */
+    border: 0.9px solid #000000; /* Добавляем границы между кнопками аккордеона */
+}
+
+#accordion_first {
+    border-radius: 9px 9px 0 0;
+}
+
+#accordion_second {
+    border-radius: 0 0 9px 9px;
+}
+
+.active, .accordion:hover {
+    background-color: #ccc;
+}
+
+.accordion:after {
+    content: '\002B'; /* Юникод символ для знака "плюс" (+) */
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212"; /* Юникод символ для знака "минус" (-) */
+}
+
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}
+
+.panel.show {
+    display: block; /* Показываем контент панели */
+}
+
+.navbar-brand img {
+    width: 45px;
+    height: 39px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 18px;
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 16px;
+    }
+
+    #helpPage-icon, #img-help-logo {
+        width: 80%;
+    }
+
+    .accordion {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .panel {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+    }
+
+    #helpPage-icon, #img-help-logo {
+        width: 60%;
+    }
+
+    .accordion {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .panel {
+        padding: 0 10px;
+    }
+}

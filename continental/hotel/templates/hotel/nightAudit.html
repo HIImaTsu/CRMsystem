@@ -1,0 +1,155 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/css/nightAudit.css' %}">
+    <title>Continental</title>
+</head>
+<body id="body-nightAudit">
+    <div class="container" id="nav-container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" >
+                    <a class="nav-link active" aria-current="page" href="#">/</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="font-weight: 600; letter-spacing:1px; color: black; font-size: 18px"> Rixos Borovoe Hotel</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link" href="#">/</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="nav-link space" href="{% url 'night-audit' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                        Ночной аудит
+                    </a>
+                </li>
+            </ul>
+            <div class="navbar">
+                <ul class="navbar-nav me-auto  mb-lg-0">
+                    <li class="nav-item">
+                        <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px; font-weight: bold; color: black">Помощь</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px; font-weight: bold; color: black">
+                        Настройка
+                        </a>
+                    </li>
+                    <li>
+                        <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" style="margin-right: 12px; font-weight: bold; color: black">{{ username }}</a>
+                       
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+        <br>
+        <div class="row" style="display: grid; grid-template-columns: 1fr 2fr; ">
+            <div class="column" style="background-color:white; margin-left:12px; height:380px; border-radius:12px ">
+                <button><p>Текущая смена</p></button>
+                <div class="row">
+                    <div class="col-6 md-12" id="text_sum_1">
+                        <div class="form-container" >
+                            <form action="/submit_form" method="post">
+                                <br>
+                                <div class="form-group">
+                                    <label for="shift">Смена:</label>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="opening_date">Дата открытия:</label>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="services_sum">Сумма услуг:</label>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <label for="total_sum">Общая СУММА:</label>
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-6 md-12">
+                        <div class="form-container" id="text_sum_2" >
+                            <form action="/submit_form" method="post">
+                                <br>
+                                <div class="form-group">
+                                    <input type="text" id="shift" name="shift">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" id="opening_date" name="opening_date">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" id="services_sum" name="services_sum">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <input type="text" id="payments_sum" name="payments_sum">
+                                </div>
+                                
+
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <br>
+                    <div class="form-group">
+                        <input type="text" class="total" id="total_sum" name="total_sum" readonly>
+                    </div>
+                </div>
+                <script>
+                    window.onload = function() {
+                      var servicesInput = document.getElementById('services_sum');
+                      var paymentsInput = document.getElementById('payments_sum');
+                      var totalInput = document.getElementById('total_sum');
+                  
+                      function calculateTotal() {
+                        var servicesSum = parseFloat(servicesInput.value) || 0;
+                        var paymentsSum = parseFloat(paymentsInput.value) || 0;
+                        var total = servicesSum + paymentsSum;
+                        totalInput.value = total.toFixed(2); // Outputs the sum as a fixed two-decimal number
+                      }
+                  
+                      servicesInput.addEventListener('input', calculateTotal);
+                      paymentsInput.addEventListener('input', calculateTotal);
+                    }
+                  </script>
+            </div>
+
+            <div class="column" id="colum_card_2" style=" border-radius:12px;">
+                <button id="nav_btn_2">Переход смены</button>
+                <div id="text_button">
+                    <p class="main_text">
+                        Переходя на следующую смену - вы <br>
+                        подвтерждаете переход даты в системе да <br>
+                        следующий день! <br>
+                        Прежде чем начать процесс, убедитесь что в <br>
+                        выезжающих и заезжающих броней на текущий <br>
+                        день не осталось!
+                    </p>
+                    <button id="nav_btn_3">Переход к следующей смене</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

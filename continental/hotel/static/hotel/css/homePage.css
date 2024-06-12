@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f0f0f3;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-container {
+    margin-bottom: 20px;
+}
+
+.navbar-brand img {
+    width: 45px;
+    height: 39px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: black;
+    font-size: 18px;
+}
+
+.card {
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.card-img-top {
+    width: 156px;
+    height: 157px;
+    margin-left: 50%;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+
+.card-title {
+    text-align: center;
+}
+
+#img-bg {
+    display: block;
+    margin: 50px auto;
+    max-width: 100%;
+    margin-right: 60%;
+    margin-top: 5%;
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 16px;
+    }
+
+    .card-img-top {
+        width: 130px;
+        height: 130px;
+        margin-bottom: 30px;
+    }
+
+    .card-title {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+        font-size: 14px;
+    }
+
+    .card-img-top {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 20px;
+    }
+
+    .card-title {
+        font-size: 14px;
+    }
+
+    #img-bg {
+        margin: 20px auto;
+        width: 80%;
+    }
+
+    .row-cols-1 .col {
+        margin-bottom: 20px;
+    }
+
+    .card {
+        border-bottom-left-radius: 25px;
+        border-bottom-right-radius: 25px;
+    }
+}
