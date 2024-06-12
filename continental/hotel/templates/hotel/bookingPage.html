@@ -244,7 +244,7 @@
     
     function populateSchedule() {
         scheduleContent.innerHTML = ''; // Очистка расписания
-        const maxEntriesPerDay = 3; // Максимальное количество блоков бронирования на дату
+        const maxEntriesPerDay = {{ total_rooms }}; // Максимальное количество блоков бронирования на дату
     
         for (let i = 0; i < 3; i++) {
             const newDate = new Date(currentDate);

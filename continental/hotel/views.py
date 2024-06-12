@@ -138,9 +138,15 @@ def house_keeping(request):
 def booking(request):
     staff_member = Staff.objects.get(user=request.user)
     hotel_id = staff_member.hotel.id
+    hotel = staff_member.hotel
     rooms = Room.objects.filter(hotel__id=hotel_id)
+
+    # Подсчитываем количество номеров в отеле
+    total_rooms = Room.objects.filter(hotel=hotel).count()
+
     return render(request, 'hotel/bookingPage.html', {
         'username': request.user.username,
+        'total_rooms': total_rooms,
         'rooms': rooms,
     })
 
@@ -198,7 +204,10 @@ def logout_user(request):
 
 @api_view(['GET'])
 def booking_data(request):
-    bookings = Booking.objects.all().select_related('guest')
+    staff_member = Staff.objects.get(user=request.user)
+    hotel = staff_member.hotel
+
+    bookings = Booking.objects.filter(guest__hotel=hotel).select_related('guest')
     serializer = BookingSerializer(bookings, many=True)
     return Response(serializer.data)
 
