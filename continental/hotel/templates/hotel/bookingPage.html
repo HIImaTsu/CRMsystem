@@ -322,9 +322,19 @@
                     if (!entries[date]) {
                         entries[date] = [];
                     }
+
+                    const guestBalance = booking.guest_info.profile.guest_balance;
+                const bookingPrice = booking.total_price;
+                let bgColor;
+                if (bookingPrice <= guestBalance) {
+                    bgColor = 'bg-green-300';
+                } else {
+                    bgColor = 'bg-yellow-300';
+                }
+
                     entries[date].push({
                         text: `${booking.guest_info.first_name} ${booking.guest_info.last_name}`,
-                        color: 'bg-green-300',
+                        color: bgColor,
                     });
                 });
             });

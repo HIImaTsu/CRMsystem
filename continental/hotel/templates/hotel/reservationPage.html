@@ -222,7 +222,7 @@
         </div>
         <div class="info-panel-item">
             <label>ИТОГО:</label>
-            <div class="line"></div>
+            <div id="totalPrice" class="total-price"></div>
             <button href="" class="nav-link" id="openModal"><label class="balance">Баланс гостя:</label></button>
             <div class="line"></div>
             <button type="submit" id="save-button" class="save-button">СОХРАНИТЬ</button>
@@ -505,19 +505,58 @@
         var selectedOption = selectedRoomType.options[selectedRoomType.selectedIndex];
     
         // Получаем цену из data-price атрибута выбранного option
-        var pricePerNight = selectedOption.getAttribute('data-price');
-    
+        var pricePerNight = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+
         // Обновляем значение поля цены за ночь
         var priceInput = document.getElementById('pricePerNight');
-        priceInput.value = pricePerNight || 'Не указана'; // Если цена не найдена, выводим сообщение
+        priceInput.value = pricePerNight ? pricePerNight.toFixed(2) : 'Не указана'; // Если цена не найдена, выводим сообщение
+
+        updateTotalPrice();
     }
-    
-    // Подключаем функцию updatePricePerNight к событию изменения выпадающего списка
+
+    function updateTotalPrice() {
+        // Получаем цену за ночь
+        var pricePerNight = parseFloat(document.getElementById('pricePerNight').value) || 0;
+
+        // Получаем количество ночей
+        var numberOfNights = parseInt(document.getElementById('number_of_nights').value) || 0;
+
+        // Вычисляем общую стоимость
+        var totalPrice = pricePerNight * numberOfNights;
+
+        // Обновляем значение поля "ИТОГО"
+        var totalPriceElement = document.getElementById('totalPrice');
+        totalPriceElement.textContent = totalPrice.toFixed(2);
+    }
+
+    // Подключаем функции к событиям изменения выпадающего списка и количества ночей
     document.getElementById('room_type').addEventListener('change', updatePricePerNight);
+    document.getElementById('number_of_nights').addEventListener('input', updateTotalPrice);
     
     // Вызываем функцию при инициализации страницы, чтобы установить начальное значение
     document.addEventListener('DOMContentLoaded', updatePricePerNight);
 </script>
+
+
+<style>
+    .info-panel-item {
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .total-price {
+        font-weight: bold;
+        font-size: 24px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .nav-link {
+        text-decoration: none;
+    }
+
+</style>
 
 
     </div>
