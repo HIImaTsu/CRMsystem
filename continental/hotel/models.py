@@ -51,7 +51,6 @@ class Booking(models.Model):
         CHECKING_IN = 'I', _('Заезжающий')
         STAYING = 'S', _('Проживающий')
         CHECKED_OUT = 'O', _('Выехавший')
-
     class ArrivalMethod(models.TextChoices):
         BY_AIR = 'AIR', _('Аэропорт')
         BY_TRAIN = 'TRAIN', _('ЖД-пути')
@@ -75,20 +74,13 @@ class Booking(models.Model):
         if self.checkin_date > self.checkout_date:
             raise ValidationError(_('Дата заезда должна быть раньше даты выезда.'))
 
-    def save(self, *args, **kwargs):
-        if not self.room_id:  # Проверяем, что поле room не заполнено
-            default_room = Room.objects.get(id=2)  # Получаем объект комнаты по умолчанию
-            self.room = default_room
-        super().save(*args, **kwargs)
-
-
 class Room(models.Model):
     hotel = models.ForeignKey('Hotel', on_delete=models.PROTECT, related_name='rooms')
     type = models.ForeignKey('RoomType', on_delete=models.PROTECT, related_name='rooms')
     room_number = models.IntegerField()
 
     def __str__(self):
-        return f"{self.room_number} ({self.hotel.name})"
+        return f"{self.room_number} {self.type} ({self.hotel.name}) "
 
     class Meta:
         unique_together = (('hotel', 'room_number'),)    # для уникальности номеров в отеле

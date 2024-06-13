@@ -6,255 +6,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link type="text/css" href="{% static 'hotel/css/style.css' %}" rel="stylesheet" />
-    <link rel="stylesheet" href="/main.js">
+    <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/css/housekeeping.css' %}">
     <title>Continental</title>
 </head>
     <body id="body-helpPage">
-        <style>
-            #nav-container.container {
-                width: 1420px !important;
-            }
-            .circle {
-                margin: 20px;
-                width: 100px; /* Радиус шара */
-                height: 100px; /* Радиус шара */
-                background-color: #5ACCFF; /* Цвет шара */
-                border-radius: 50%; /* Делаем круг */
-                margin-top: 25px;
-            }
-            .circle-1 {
-                width: 100px; /* Радиус шара */
-                height: 100px; /* Радиус шара */
-                background-color: #FF8588; /* Цвет шара */
-                border-radius: 50%; /* Делаем круг */
-                margin-top: 25px;
-            }
-            .circle-2 {
-                width: 100px; /* Радиус шара */
-                height: 100px; /* Радиус шара */
-                background-color: #1CFF40; /* Цвет шара */
-                border-radius: 50%; /* Делаем круг */
-                margin-top: 25px;
-            }
-            .row {
-                width: 1295px;
-                background-color: white;
-                height: 150px;
-                margin-left: 1px;
-            }
-            #row-2 {
-                width: 1295px;
-                background-color: white;
-                height: 1000px;
-
-            }
-
-            #row-diagram {
-                height: 600px;
-                border-radius: 6px;
-            }
-
-            .housekeepingBody {
-                background-color: white;
-            }
-
-            #column1 {
-
-                border-radius: 6px;
-            }
-            .card-text {
-                margin-left: 150px;
-            }
-
-
-              .schedule-container {
-                background-color: #5F7DA5;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-                color: white;
-                width: 500px;
-                height: 580px;
-                margin-left: 20px;
-              }
-              .schedule-header {
-                margin-bottom: 30px;
-                font-size: 24px;
-              }
-              .bar {
-                height: 100px;
-                width: 100px;
-                margin: 10px;
-                display: inline-block;
-                border-radius: 15px;
-              }
-              .red-bar {
-                background-color: #FF8588;;
-                height: 350px; /* Adjust height as needed */
-              }
-              .blue-bar {
-                background-color: #5ACCFF;
-                height: 200px; /* Adjust height as needed */
-              }
-              .green-bar {
-                background-color: #1CFF40;
-                height: 220px; /* Adjust height as needed */
-              }
-            
-              
-              .schedule-date {
-                font-size: 50px; /* Adjust as needed */
-                line-height: 1; /* Adjust line spacing as needed */
-                letter-spacing: 5px; /* Adjust letter spacing as needed */
-                
-              }
-              
-              .schedule-day {
-                font-size: 40px; /* Adjust as needed */
-                letter-spacing: 5px; /* Adjust letter spacing as needed */
-                margin-bottom: 20px; /* Adjust as needed */
-                font-weight:100;
-              }
-              .text-style {
-                font-family: 'Arial', sans-serif; /* Change to the specific font if known */
-                font-size: 28px; /* Adjust the size as needed */
-                font-weight: bold; /* This will make the text bold */
-                color: #000000; /* Assuming the text is black */
-                margin-left: 120px;
-              }
-              
-              .number-style {
-                font-size: 32px; /* Adjust the size as needed */
-                font-weight: bold; /* This will make the text bold */
-                margin-left: 120px;
-              }
-              .text-st-1 {
-                margin-left: 30px;
-              }
-
-              .btn-housekeeping-1 {
-                background-color: #FF8588;
-                color: black;
-                border: 1px solid black;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 0 2px;
-                cursor: pointer;
-                border-radius: 0 0 23px 23px;
-                margin-left: 18px;
-                width: 171px;
-                font-family: 'Arial', sans-serif; /* Change to the specific font if known */
-                font-size: 18px; /* Adjust the size as needed */
-                font-weight: bold;
-              }
-
-              .btn-housekeeping-2 {
-                background-color: #5ACCFF;
-                color: black;
-                border: 1px solid black;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 0 2px;
-                cursor: pointer;
-                border-radius: 0 0 23px 23px;
-                margin-left: 18px;
-                width: 171px;
-                font-family: 'Arial', sans-serif; /* Change to the specific font if known */
-                font-size: 18px; /* Adjust the size as needed */
-                font-weight: bold;
-              }
-
-              .btn-housekeeping-3 {
-                background-color: #1CFF40;
-                color: black;
-                border: 1px solid black;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 0 2px;
-                cursor: pointer;
-                border-radius: 0 0 23px 23px;
-                margin-left: 18px;
-                width: 171px;
-                font-family: 'Arial', sans-serif; /* Change to the specific font if known */
-                font-size: 18px; /* Adjust the size as needed */
-                font-weight: bold;
-              }
-
-              #col-diagram-1 {
-                border: 1px solid black;
-                height: 580px;
-                border-radius: 15px;
-              }
-
-              #col-diagram-2 {
-                border: 1px solid black;
-                height: 580px;
-                border-radius: 15px;
-              }
-
-              #col-diagram-3 {
-                border: 1px solid black;
-                height: 580px;
-                border-radius: 15px;
-              }
-
-              .text-column {
-                margin-top: 15px;
-                margin-left: 10px;
-                font-family: 'Arial', sans-serif; /* Change to the specific font if known */
-                font-size: 18px; /* Adjust the size as needed */
-                font-weight: bold;
-                word-spacing: 40px;
-              }
-
-        </style>
         <div class="container" id="nav-container">
-           <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item" >
-                    <a class="nav-link active" aria-current="page" href="#">/</a>
-                </li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#"> Rixos Borovoe Hotel</a></li>
-            </ul>
-            <div class="navbar">
-                <ul class="navbar-nav me-auto  mb-lg-0">
-                    <li class="nav-item">
-                        <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
-                    </li>
-                    <li class="nav-item" >
-                        <a class="nav-link space" href="{% url 'help' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
-                        Настройка
-                        </a>
-                    </li>
-                    <li>
-                        <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
-
-                    </li>
-                </ul>
-            </div>
-            </div>
-        </nav>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'hotel/img/Group.svg' %}" alt="Logo" width="45" height="39" class="d-inline-block align-text-top"></a>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item" >
+                            <a class="nav-link " href="#">/</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  href="{% url 'home' %}" style="font-weight: 600; letter-spacing:1px; color: black; font-size: 18px"> Rixos Borovoe Hotel</a>
+                        </li>
+                        <li class="nav-item" >
+                            <a class="nav-link" href="#">/</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'housekeeping' %}" style="margin-right: 12px;">House-Keeping</a>
+                        </li>
+                    </ul>
+                    <div class="navbar">
+                        <ul class="navbar-nav me-auto  mb-lg-0">
+                            <li class="nav-item">
+                                <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px; font-weight: bold; color: black">Помощь</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item" >
+                                <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px; font-weight: bold; color: black">
+                                Настройка
+                                </a>
+                            </li>
+                            <li>
+                                <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" style="margin-right: 12px; font-weight: bold; color: black">{{ username }}</a>
+                            
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
             <br>
             <div id="housekeepingBody">
                 <div class="row">

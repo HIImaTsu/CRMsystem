@@ -1,94 +1,99 @@
-import json
-from itertools import groupby
+import random
 
 from django.contrib.auth import login, authenticate, logout
-from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
-from django.core.serializers.json import DjangoJSONEncoder
-from django.db.models.functions import TruncDate
-from django.forms import model_to_dict
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.utils import timezone
-from django.views.generic import UpdateView
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-
 from .models import *
 from .forms import *
 from django.core.serializers import serialize
-import random
-import logging
 from django.contrib import messages
-from django.core.serializers import serialize
-
 from .serializers import BookingSerializer
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 
 def index(request):
-    return HttpResponse("<h1>Страница CONTIN</h1>")
+    return HttpResponse("<h1>Страница CONTINENTAL</h1>")
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
 @login_required
 def home(request):
-    return render(request, 'hotel/homePage.html')
+    return render(request, 'hotel/homePage.html', {'username': request.user.username})
 
 @login_required()
 def add_booking(request):
-
     staff_member = Staff.objects.get(user=request.user)
     hotel_id = staff_member.hotel.id
+    hotel = staff_member.hotel
     room_types = RoomType.objects.filter(hotel__id=hotel_id)
     way_of_staying_choices = Booking.ArrivalMethod.choices
     payment_method = Payment.PaymentMethod.choices
 
+    # СНАЧАЛА ПРОВЕРЯЕМ ГОСТЯ И ЗАПОЛНЯЕМ ДАННЫЕ ГОСТЯ - ПОТОМ УЖЕ СОЗДАЕМ БРОНЬ
     if request.method == 'POST':
         booking_form = AddBookingForm(request.POST)
-        booking_form.fields['room_type'].queryset = RoomType.objects.filter(hotel_id=hotel_id)
         guest_form = AddGuestForm(request.POST)
-        profile_form = AddGuestProfileForm(request.POST)
+        iin = request.POST.get('iin')
+        document_number = request.POST.get('document_number')
+        try:
+            existing_profile = GuestProfile.objects.get(iin=iin, document_number=document_number)
+            guest = existing_profile.guest
+            messages.success(request, 'Гость найден в системе. Создаем бронирование для существующего гостя.')
+        except GuestProfile.DoesNotExist:
+            if guest_form.is_valid():
+                guest = guest_form.save(commit=False)
+                guest.hotel = hotel
+                guest.save()
 
-        if booking_form.is_valid() and guest_form.is_valid() and profile_form.is_valid():
+                profile_form = AddGuestProfileForm(request.POST)
+                if profile_form.is_valid():
+                    profile = profile_form.save(commit=False)
+                    profile.guest = guest
+                    profile.save()
+                    messages.success(request, 'Новый гость и профиль успешно созданы. Бронь зарезервирована')
+                else:
+                    messages.error(request, 'Ошибка в данных профиля.')
+                    print("Profile Form Errors:", profile_form.errors)
+                    return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
+            else:
+                messages.error(request, 'Ошибка в данных гостя.')
+                print("Guest Form Errors:", guest_form.errors)
+                return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
 
-            messages.success(request, 'Бронь и гость успешно зарегистрированы!')
+            # Создаем новую бронь
+        if booking_form.is_valid():
+            checkin_date = booking_form.cleaned_data['checkin_date']
+            checkout_date = booking_form.cleaned_data['checkout_date']
 
-            guest = guest_form.save(commit=False)
-            guest.hotel = staff_member.hotel
-            guest.save()
+            room_type_id = request.POST.get('room_type')  # Получаем ID из формы
+            try:
+                room_type = RoomType.objects.get(pk=room_type_id)  # Ищем объект RoomType по ID
+            except RoomType.DoesNotExist:
+                messages.error(request, "Категория номера не найдена.")
+                return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
 
-            new_booking = booking_form.save(commit=False)
-            new_booking.guest = guest
-            new_booking.save()
-
-            profile = profile_form.save(commit=False)
-            profile.guest = guest
-            profile.save()
-
-            # ДЛЯ ВВЕДЕНИЯ О БАЛАНСЕ ГОСТЯ
-            payment_method = request.POST.get('paymentMethod')
-            amount = request.POST.get('amount')
-            if payment_method and amount:
-                try:
-                    amount = float(amount)  # Убедитесь, что сумма преобразуется в число
-                except ValueError:
-                    # Необходима обработка ошибки, если сумма не является числом
-                    pass
-
-                # Создаем новую запись оплаты
-                Payment.objects.create(
-                    booking=new_booking,
-                    method=payment_method,
-                    amount=amount
-                )
-
-            redirect_url = reverse('booking')  # Используем reverse, чтобы получить URL по имени пути
-            return JsonResponse({'redirect_url': request.build_absolute_uri(redirect_url)})
-
+            available_rooms = [room for room in Room.objects.filter(type=room_type)
+                               if is_room_available(room, checkin_date, checkout_date)]
+            if available_rooms:
+                new_booking = booking_form.save(commit=False)
+                new_booking.room = random.choice(available_rooms)
+                new_booking.guest = guest
+                new_booking.save()
+                return JsonResponse({'redirect_url': request.build_absolute_uri(reverse('booking'))})
+            else:
+                messages.error(request, 'Свободных номеров на выбранные даты нету')
+                return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
         else:
-            messages.error(request, 'Введены некорректные данные.')
+            messages.error(request, 'Ошибка в данных бронирования.')
+            print("Booking Form Errors:", booking_form.errors)
+            return JsonResponse({'redirect_url_error': request.build_absolute_uri(reverse('add-booking'))})
+
     else:
         booking_form = AddBookingForm()
         guest_form = AddGuestForm()
@@ -102,6 +107,7 @@ def add_booking(request):
         'way_of_staying_choices': way_of_staying_choices,
         'gender_choices': Guest.GENDER_CHOICES,
         'payment_method': payment_method,
+        'username': request.user.username,
     })
 
 # class UpdateGuest(UpdateView):
@@ -126,22 +132,51 @@ def house_keeping(request):
     #     'checkins': checkins,
     #     'wet_cleanings': wet_cleanings,
     # }
-    return render(request, 'hotel/housekeeping.html')
+    return render(request, 'hotel/housekeeping.html', {'username': request.user.username})
 
 @login_required()
 def booking(request):
-    return render(request, 'hotel/bookingPage.html')
+    staff_member = Staff.objects.get(user=request.user)
+    hotel_id = staff_member.hotel.id
+    hotel = staff_member.hotel
+    rooms = Room.objects.filter(hotel__id=hotel_id)
+
+    # Подсчитываем количество номеров в отеле
+    total_rooms = Room.objects.filter(hotel=hotel).count()
+
+    return render(request, 'hotel/bookingPage.html', {
+        'username': request.user.username,
+        'total_rooms': total_rooms,
+        'rooms': rooms,
+    })
 
 @login_required()
 def night_audit(request):
-    return render(request, 'hotel/nightAudit.html')
+    return render(request, 'hotel/nightAudit.html', {'username': request.user.username})
 
 @login_required()
 def cabinet(request):
-    return render(request, 'hotel/accountPage.html')
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user) # Обновить сессию пользователя, чтобы не выходить из системы
+            messages.success(request, 'Ваш пароль был успешно изменен.')
+            return redirect('cabinet')  # перенаправить на страницу профиля
+        else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'hotel/accountPage.html', {
+        'username': request.user.username,
+        'form': form,
+    })
 
 def help_page(request):
-    return render(request, 'hotel/helpPage.html')
+    return render(request, 'hotel/helpPage.html', {'username': request.user.username})
+
+def reports(request):
+    return render(request, 'hotel/reportsPage.html', {'username': request.user.username})
 
 
 def login_user(request):
@@ -153,6 +188,10 @@ def login_user(request):
                                 password=cd['password'])
             if user and user.is_active:
                 login(request, user)
+                if cd.get('remember'):
+                    request.session.set_expiry(604800)  # 1 неделя жизни, указывается в секундах
+                else:
+                    request.session.set_expiry(0)  # Сессия закроется при закрытии браузера
                 return HttpResponseRedirect(reverse('home'))
     else:
         form = LoginUserForm()
@@ -165,10 +204,21 @@ def logout_user(request):
 
 @api_view(['GET'])
 def booking_data(request):
-    bookings = Booking.objects.all().select_related('guest')
-    serializer = BookingSerializer(bookings, many=True)
-    return Response(serializer.data)  # Rest Framework позаботится о форматировании ответа
+    staff_member = Staff.objects.get(user=request.user)
+    hotel = staff_member.hotel
 
+    bookings = Booking.objects.filter(guest__hotel=hotel).select_related('guest')
+    serializer = BookingSerializer(bookings, many=True)
+    return Response(serializer.data)
+
+
+def is_room_available(room, checkin_date, checkout_date):
+    # Получаем все бронирования для номера
+    bookings = Booking.objects.filter(room=room)
+    for booking in bookings:
+        if booking.checkin_date < checkout_date and booking.checkout_date > checkin_date:
+            return False  # Даты перекрываются, номер недоступен
+    return True  # Номер доступен для бронирования
 
 
 

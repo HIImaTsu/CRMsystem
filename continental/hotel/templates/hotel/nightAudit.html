@@ -7,156 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'hotel/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'hotel/css/nightAudit.css' %}">
     <title>Continental</title>
 </head>
 <body id="body-nightAudit">
-    <style>
-        body {
-          font-family: Arial, sans-serif;
-
-        }
-      
-        .form-container {
-          max-width: 300px;
-        }
-      
-        .form-group {
-          margin-bottom: 1px;
-          margin: 1px;
-        }
-      
-        label {
-          display: block;
-          margin-bottom: 1px;
-        }
-      
-        input[type="text"],
-        .total {
-          width: 100%;
-          padding: 8px;
-          margin: 5px 0 20px 0;
-          display: inline-block;
-          border: 1px solid #ccc;
-          box-sizing: border-box;
-        }
-      
-        .total {
-          font-weight: bold;
-          background-color: #f2f2f2;
-        }
-      
-        button {
-            border: none;
-            background-color: #5F7DA5;
-            color: rgb(255, 255, 255);
-            padding: 1px 2px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 19px;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 15px 15px;
-            margin-left: 65px;
-            width: 290px;
-            height: 40px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        button p .main_text {
-            margin-top: 10px;
-            margin-left: 3px;
-        }
-      
-        .form-container input {
-            width: 230px;
-            height: 30px;
-        }
-
-        #text_sum_1 label {
-            margin-left: 25px;
-        }
-        #text_sum_1 {
-            width: 165px;
-        }
-
-        #text_sum_2 input {
-            margin-right: 50px;
-            margin: 1px;
-            border-radius: 6px;
-            background-color: #bec4cbc5;
-        }
-
-        .form-group #opening_date {
-            margin-top: 13px;
-        }
-
-        .form-group #services_sum {
-            margin-top: 20px;
-        }
-
-
-        .form-group #payments_sum {
-            margin-top: 30px;
-        }
-
-        .form-group #total_sum {
-            margin-top: 20px;
-            margin: 1px;
-            border-radius: 6px;
-            background-color: #bec4cbc5;
-        }
-
-        #text_button {
-            margin: 30px;
-            padding: 2px;
-        }
-
-        #nav_btn_2 {
-            border: none;
-            background-color: #5F7DA5;
-            color: rgb(255, 255, 255);
-            padding: 1px 2px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 19px;
-            margin: 0 2px;
-            cursor: pointer;
-            border-radius: 0 0 15px 15px;
-            margin-left: 60px;
-            width: 300px;
-            height: 40px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-        }
-
-        #nav_btn_3 {
-            border: none;
-            background-color: #5F7DA5;
-            color: rgb(255, 255, 255);
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 19px;
-            cursor: pointer;
-            border-radius: 17px;
-            width: 340px;
-            height: 70px;
-            font-weight: 2px bold ;
-            letter-spacing: 0.5px;
-            margin-left: -15px;
-            margin: 10px;
-        }
-
-        #colum_card_2 {
-            background-color:white;
-            margin-left:40px;
-            width:450px; 
-            height:360px
-        }
-      </style>
     <div class="container" id="nav-container">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -166,7 +20,7 @@
                     <a class="nav-link active" aria-current="page" href="#">/</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"> Rixos Borovoe Hotel</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="font-weight: 600; letter-spacing:1px; color: black; font-size: 18px"> Rixos Borovoe Hotel</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link" href="#">/</a>
@@ -183,13 +37,13 @@
                         <a href=""><img src="{% static 'hotel/img/Помощь.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px;">Помощь</a>
+                        <a class="nav-link" href="{% url 'help' %}" style="margin-right: 12px; font-weight: bold; color: black">Помощь</a>
                     </li>
                     <li class="nav-item">
                         <a href=""><img src="{% static 'hotel/img/Settings.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item" >
-                        <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px;">
+                        <a class="nav-link space" href="{% url 'cabinet' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right: 12px; font-weight: bold; color: black">
                         Настройка
                         </a>
                     </li>
@@ -197,7 +51,7 @@
                         <a href=""><img src="{% static 'hotel/img/cabinet.svg' %}" alt="" id="img-help"></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link" style="margin-right: 12px;">adilet_yeraly</a>
+                        <a href="#" class="nav-link" style="margin-right: 12px; font-weight: bold; color: black">{{ username }}</a>
                        
                     </li>
                 </ul>

@@ -1,0 +1,155 @@
+body {
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+.md-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+#log-col-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.login-container {
+    font-family: Arial, sans-serif;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.2em;
+}
+
+.form-field input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+}
+
+.checkbox {
+    margin-bottom: 20px;
+}
+
+.checkbox input {
+    margin-right: 5px;
+}
+
+.login-btn {
+    background-color: #5F7DA5;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 3px;
+    font-size: 1.1em;
+}
+
+.support {
+    text-align: center;
+    display: block;
+    color: #555;
+    font-size: 0.9em;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+/* Медиа-запросы для адаптации */
+@media (max-width: 1200px) {
+    .login-container {
+        padding: 15px;
+    }
+
+    .form-field label {
+        font-size: 1em;
+    }
+
+    .login-btn {
+        font-size: 1em;
+    }
+
+    #log-col-2 img {
+        height: auto;
+        max-height: 600px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .col-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .row {
+        height: auto;
+    }
+
+    #log-col-2 {
+        padding: 10px;
+    }
+
+    .login-container {
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .form-field label {
+        font-size: 0.9em;
+    }
+
+    .login-btn {
+        font-size: 0.9em;
+    }
+
+    #log-col-2 img {
+        height: auto;
+        max-height: 400px;
+        margin: 0 auto;
+    }
+}
